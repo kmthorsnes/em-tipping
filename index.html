@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Omega Em-Konkurranse</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <div class="wrapper m-5 p-5">
+        <h1 id="title">Omegas EM-tippekonkurranse</h1>
+        <ul>
+          <li>Hvilket europeisk land er best til å spille fotball</li>
+          <li>Hvem i Omega er best til å tippe?</li>
+        </ul>
+        <div id="table"></div>
+        <ol class="list-decimal"></ol>
+
+        <table class="table-auto">
+          <thead>
+            <tr>
+              <th>Navn</th>
+              <th>Poeng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="result in results"
+              :key="result.point"
+              class="bg-emerald-200"
+            >
+              <ol class="list-decimal">
+                <td><li>{{result.name}}</li></td>
+                <td><li>{{result.points}}</li></td>
+              </ol>
+            </tr>
+          </tbody>
+        </table>
+        <p>{{ message}}</p>
+      </div>
+    </div>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Føkk you",
+          results: [
+            { name: "Kalle", points: 3 },
+            { name: "Bahador", points: 1 },
+            { name: "Kristina", points: 1 },
+            { name: "Tormod", points: 1 },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>
