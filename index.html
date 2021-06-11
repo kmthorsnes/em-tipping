@@ -13,51 +13,70 @@
   </head>
   <body>
     <div id="app">
-      <div class="wrapper m-5 p-5">
-        <h1 id="title">Omegas EM-tippekonkurranse</h1>
-        <ul>
-          <li>Hvilket europeisk land er best til å spille fotball</li>
-          <li>Hvem i Omega er best til å tippe?</li>
-        </ul>
-        <div id="table"></div>
-        <ol class="list-decimal"></ol>
-
-        <table class="table-auto">
-          <thead>
-            <tr>
-              <th>Navn</th>
-              <th>Poeng</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
+      <div class="bg-red-100 h-screen pt-3">
+        <div
+          class="
+            wrapper
+            m-5
+            p-5
+            container
+            mx-auto
+            border-solid border-4 border-pink-600
+            rounded
+            bg-gray-100
+          "
+        >
+          <h1 class="text-xl text-center font-mono pb-4 font-bold" id="title">
+            Omegas EM-tippekonkurranse
+          </h1>
+          <p class="text-base font-mono mx-10">
+            Endelig skal de store spørsmål her i livet besvares:
+          </p>
+          <div class="mt-5 ml-14">
+            <ul class="list-disc font-mono">
+              <li>Hvem i Omega er best til å tippe?</li>
+              <li>Hvilket europeisk land er best til å spille fotball?</li>
+            </ul>
+          </div>
+          <h2 class="text-center pb-2 text-lg font-mono mt-5 font-bold">
+            Rangering:
+          </h2>
+          <div class="mx-8">
+            <ol
               v-for="result in results"
               :key="result.point"
-              class="bg-emerald-200"
+              class="list-decimal mx-10"
             >
-              <ol class="list-decimal">
-                <td><li>{{result.name}}</li></td>
-                <td><li>{{result.points}}</li></td>
-              </ol>
-            </tr>
-          </tbody>
-        </table>
-        <p>{{ message}}</p>
+              <li class="font-mono">{{result.name}} - {{result.points}}</li>
+            </ol>
+          </div>
+          <p class="text-center font-mono font-extralight">
+            Sist oppdatert: {{ lastUpdate }}
+          </p>
+        </div>
       </div>
     </div>
     <script>
       var app = new Vue({
         el: "#app",
         data: {
-          message: "Føkk you",
           results: [
-            { name: "Kalle", points: 3 },
-            { name: "Bahador", points: 1 },
-            { name: "Kristina", points: 1 },
-            { name: "Tormod", points: 1 },
+            { name: "Anders", points: 0 },
+            { name: "Bahador", points: 0 },
+            { name: "Caroline", points: 0 },
+            { name: "Christina", points: 0 },
+            { name: "Elin", points: 0 },
+            { name: "Joakim", points: 0 },
+            { name: "Kalle", points: 0 },
+            { name: "Kristian", points: 0 },
+            { name: "Louise", points: 0 },
+            { name: "Tormod", points: 0 },
           ],
+          lastUpdate: "11. juni 2020",
         },
       });
     </script>
+
+    <style></style>
   </body>
 </html>
