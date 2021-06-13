@@ -1,17 +1,1 @@
-{
-  "scores": [
-    { "name": "Anders", "score": 5 },
-    { "name": "Tormod", "score": 4 },
-    { "name": "Elin", "score": 3 },
-    { "name": "Karoline", "score": 3 },
-    { "name": "Caroline", "score": 2 },
-    { "name": "Christina", "score": 2 },
-    { "name": "Joakim", "score": 2 },
-    { "name": "Kalle", "score": 2 },
-    { "name": "Kristian", "score": 2 },
-    { "name": "Louise", "score": 2 },
-    { "name": "Stian", "score": 2 },
-    { "name": "Bahador", "score": 1 }
-  ],
-  "lastUpdate": "2021-06-13T14:02:45.988Z"
-}
+{"scores":[{"name":"Anders","score":6},{"name":"Christina","score":5},{"name":"Stian","score":5},{"name":"Tormod","score":5},{"name":"Karoline","score":4},{"name":"Caroline","score":3},{"name":"Elin","score":3},{"name":"Joakim","score":3},{"name":"Kalle","score":3},{"name":"Kristian","score":2},{"name":"Louise","score":2},{"name":"Bahador","score":1}],"lastUpdate":"2021-06-13T14:52:04.835Z"}
