@@ -19,7 +19,7 @@ let names = [
   'Kristian',
   'Louise',
   'Stian',
-  'Tormod',
+  'Tormod'
 ];
 
 const translation = {
@@ -49,7 +49,7 @@ const translation = {
   Tyskland: 'Germany',
   H: 'Home',
   B: 'Away',
-  U: 'Draw',
+  U: 'Draw'
 };
 
 function predict(name) {
@@ -59,20 +59,20 @@ function predict(name) {
   const sheet = workbook.Sheets[sheetName];
 
   const prediction = {
-    groupStageMatches: [],
+    groupStageMatches: {},
     groupStageResults: {
       A: [],
       B: [],
       C: [],
       D: [],
       E: [],
-      F: [],
+      F: []
     },
     quarterfinal: [],
     semifinal: [],
     final: [],
     champion: '',
-    topScorers: [],
+    topScorers: []
   };
 
   // GROUP STAGE MATCHES
@@ -81,18 +81,15 @@ function predict(name) {
   /* Iterate through each row and add results */
   for (let R = range1.s.r; R <= range1.e.r; R++) {
     for (let C = range1.s.c; C <= range1.e.c; C += 7) {
-      const home = getTranslatedValue({ c: C, r: R });
-      const away = getTranslatedValue({ c: C + 2, r: R });
+      const home = getCellValue({ c: C, r: R });
+      const away = getCellValue({ c: C + 2, r: R });
       const homeScore = getCellValue({ c: C + 3, r: R });
       const awayScore = getCellValue({ c: C + 5, r: R });
-      const matchResult = getTranslatedValue({ c: C + 6, r: R });
-      prediction.groupStageMatches.push({
-        home,
-        away,
-        homeScore,
-        awayScore,
-        matchResult,
-      });
+      const hub = getCellValue({ c: C + 6, r: R });
+      prediction.groupStageMatches[`${home} - ${away}`] = {
+        result: `${homeScore} - ${awayScore}`,
+        hub
+      };
     }
   }
 
@@ -111,7 +108,7 @@ function predict(name) {
     else group = 'F';
 
     if (idx % 5 !== 0) {
-      const team = getTranslatedValue({ c: C, r: R });
+      const team = getCellValue({ c: C, r: R });
       prediction.groupStageResults[group].push(team);
     }
   }
@@ -120,7 +117,7 @@ function predict(name) {
   const range3 = XLSX.utils.decode_range('AO10:AO17');
   for (let R = range3.s.r; R <= range3.e.r; R++) {
     const C = range3.s.c;
-    const team = getTranslatedValue({ c: C, r: R });
+    const team = getCellValue({ c: C, r: R });
     prediction.quarterfinal.push(team);
   }
 
@@ -128,7 +125,7 @@ function predict(name) {
   const range4 = XLSX.utils.decode_range('AQ10:AQ13');
   for (let R = range4.s.r; R <= range4.e.r; R++) {
     const C = range4.s.c;
-    const team = getTranslatedValue({ c: C, r: R });
+    const team = getCellValue({ c: C, r: R });
     prediction.semifinal.push(team);
   }
 
@@ -136,13 +133,13 @@ function predict(name) {
   const range5 = XLSX.utils.decode_range('AS10:AS11');
   for (let R = range5.s.r; R <= range5.e.r; R++) {
     const C = range5.s.c;
-    const team = getTranslatedValue({ c: C, r: R });
+    const team = getCellValue({ c: C, r: R });
     prediction.final.push(team);
   }
 
   // Champion AU10
   const cell6 = XLSX.utils.decode_cell('AU10');
-  prediction.champion = getTranslatedValue(cell6);
+  prediction.champion = getCellValue(cell6);
 
   // Top scorer AW10:AW11
   const range7 = XLSX.utils.decode_range('AW10:AW11');
@@ -168,7 +165,7 @@ function predict(name) {
 }
 
 for (let name of names) {
-  console.log(`Importing ${name}.xlsx ...`)
+  console.log(`Importing ${name}.xlsx ...`);
   predictionData[name] = predict(name);
 }
 

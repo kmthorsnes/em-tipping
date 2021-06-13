@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "convert": "node helpers/converter.js"
+    "convert": "node helpers/converter.js",
+    "calculate": "node helpers/calculator.js"
   },
   "repository": {
     "type": "git",
