@@ -23,12 +23,27 @@ for (let name of names) {
   calcTopScorers(name);
 }
 
+// turn object to array of objects and sort
+const scoresArray = [];
+for (let name of Object.keys(scores)) {
+  const result = { name, score: scores[name] };
+  scoresArray.push(result);
+}
+scoresArray.sort((a, b) => {
+  if (a.score < b.score) return 1;
+  else if (a.score > b.score) return -1;
+  else return 0;
+});
+
 // write file in json format
 console.log('Writing to file scores.json ...');
-const jsonData = JSON.stringify(scores);
+const jsonData = JSON.stringify({
+  scores: scoresArray,
+  lastUpdate: new Date()
+});
 fs.writeFileSync('./data/scores.json', jsonData);
 
-console.log(scores);
+console.log(scoresArray);
 console.log('Done!\n');
 
 /**

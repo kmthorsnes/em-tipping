@@ -1,14 +1,17 @@
 {
-  "Anders": 5,
-  "Bahador": 1,
-  "Caroline": 2,
-  "Christina": 2,
-  "Elin": 3,
-  "Joakim": 2,
-  "Kalle": 2,
-  "Karoline": 3,
-  "Kristian": 2,
-  "Louise": 2,
-  "Stian": 2,
-  "Tormod": 4
+  "scores": [
+    { "name": "Anders", "score": 5 },
+    { "name": "Tormod", "score": 4 },
+    { "name": "Elin", "score": 3 },
+    { "name": "Karoline", "score": 3 },
+    { "name": "Caroline", "score": 2 },
+    { "name": "Christina", "score": 2 },
+    { "name": "Joakim", "score": 2 },
+    { "name": "Kalle", "score": 2 },
+    { "name": "Kristian", "score": 2 },
+    { "name": "Louise", "score": 2 },
+    { "name": "Stian", "score": 2 },
+    { "name": "Bahador", "score": 1 }
+  ],
+  "lastUpdate": "2021-06-13T14:02:45.988Z"
 }

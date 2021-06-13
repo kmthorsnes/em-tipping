@@ -42,8 +42,8 @@
             Rangering:
           </h2>
           <div class="mx-8">
-            <ol v-for="result in results" :key="result.point" class="mx-10">
-              <li class="font-mono">{{result.name}}: {{result.points}}</li>
+            <ol v-for="(result, idx) in results" :key="idx" class="mx-10">
+              <li class="font-mono">{{result.name}}: {{result.score}}</li>
             </ol>
           </div>
           <p class="text-center font-mono font-extralight">
@@ -55,22 +55,25 @@
     <script>
       var app = new Vue({
         el: '#app',
-        data: {
-          results: [
-            { name: 'Anders', points: 0 + (1 + 0) },
-            { name: 'Bahador', points: 0 + (0 + 0) },
-            { name: 'Caroline', points: 0 + (1 + 0) },
-            { name: 'Christina', points: 0 + (1 + 0) },
-            { name: 'Elin', points: 0 + (1 + 0) },
-            { name: 'Joakim', points: 0 + (1 + 0) },
-            { name: 'Kalle', points: 0 + (1 + 0) },
-            { name: 'Karoline', points: 0 + (1 + 0) },
-            { name: 'Kristian', points: 0 + (1 + 0) },
-            { name: 'Louise', points: 0 + (1 + 0) },
-            { name: 'Stian', points: 0 + (1 + 0) },
-            { name: 'Tormod', points: 0 + (1 + 0) }
-          ],
-          lastUpdate: '12. juni 2020 00:07 '
+        data() {
+          return {
+            results: [],
+            lastUpdate: '12. juni 2020 00:07 '
+          };
+        },
+        mounted() {
+          fetch('/data/scores.json')
+            .then((response) => {
+              if (!response.ok)
+                throw new Error('HTTP error ' + response.status);
+              return response.json();
+            })
+            .then((data) => {
+              const { scores, lastUpdate } = data;
+              this.results = scores;
+              const date = new Date(lastUpdate);
+              this.lastUpdate = date;
+            });
         }
       });
     </script>
