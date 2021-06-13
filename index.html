@@ -105,9 +105,10 @@
               const day = dateObject.getDate();
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
-              const hours = dateObject.getHours();
-              const minutes = dateObject.getMinutes();
-
+              let hours = dateObject.getHours();
+              const hours = ("0" + hours).slice(-2);
+              let minutes = dateObject.getMinutes();
+              const minutes = ("0" + minutes).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
