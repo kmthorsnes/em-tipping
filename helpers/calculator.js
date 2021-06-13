@@ -58,7 +58,7 @@ function initializeScore(name) {
 function calcGroupStageMatches(name) {
   const matchPredictions = predictions[name].groupStageMatches;
   const matchResults = results.groupStageMatches;
-  for (let j of Object.keys(matchPredictions)) {
+  for (let j in matchPredictions) {
     if (matchPredictions[j].hub === matchResults[j].hub) scores[name]++;
     if (matchPredictions[j].result === matchResults[j].result)
       scores[name] += 2;

@@ -59,7 +59,7 @@ function predict(name) {
   const sheet = workbook.Sheets[sheetName];
 
   const prediction = {
-    groupStageMatches: {},
+    groupStageMatches: [],
     groupStageResults: {
       A: [],
       B: [],
@@ -86,10 +86,11 @@ function predict(name) {
       const homeScore = getCellValue({ c: C + 3, r: R });
       const awayScore = getCellValue({ c: C + 5, r: R });
       const hub = getCellValue({ c: C + 6, r: R });
-      prediction.groupStageMatches[`${home} - ${away}`] = {
+      prediction.groupStageMatches.push({
+        match: `${home} - ${away}`,
         result: `${homeScore} - ${awayScore}`,
         hub
-      };
+      });
     }
   }
 
