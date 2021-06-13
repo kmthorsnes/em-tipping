@@ -38,15 +38,43 @@
               <li>Hvilket europeisk land er best til å spille fotball?</li>
             </ul>
           </div>
-          <h2 class="text-center pb-2 text-lg font-mono mt-5 font-bold">
-            Rangering:
-          </h2>
-          <div class="mx-8">
-            <ol class="mx-10">
-              <li v-for="(result, idx) in results" :key="idx" class="font-mono">
-                {{result.name}}: {{result.score}}
-              </li>
-            </ol>
+          <div class="flex flex-wrap mb-5">
+            <div class="flex-auto">
+              <div class="mx-8">
+                <ol class="mx-10">
+                  <h2 class="pb-2 text-lg font-mono mt-5 font-bold">
+                    Rangering:
+                  </h2>
+                  <li
+                    v-for="(result, idx) in results"
+                    :key="idx"
+                    class="font-mono"
+                  >
+                    {{result.name}}: {{result.score}}
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <div class="flex-auto">
+              <div class="mx-8">
+                <ol class="mx-10">
+                  <h2 class="pb-2 text-lg font-mono mt-5 font-bold">
+                    Neste kamp:
+                  </h2>
+                  <p class="font-mono">{{nextMatchStats.nextMatch}}</p>
+                  <h2 class="pb-2 text-lg font-mono mt-5 font-bold">
+                    Tippestatistikk:
+                  </h2>
+                  <li
+                    v-for="(s, idx) in nextMatchStats.stats"
+                    :key="idx"
+                    class="font-mono"
+                  >
+                    ({{s.stat}}) => {{s.freq}} spiller(e)
+                  </li>
+                </ol>
+              </div>
+            </div>
           </div>
           <p class="text-center font-mono font-extralight">
             Sist oppdatert: {{ lastUpdate }}
@@ -56,32 +84,36 @@
     </div>
     <script>
       var app = new Vue({
-        el: "#app",
+        el: '#app',
         data() {
           return {
             results: [],
-            lastUpdate: '',
+            nextMatchStats: {},
+            lastUpdate: ''
           };
         },
         mounted() {
-          fetch("/data/scores.json")
+          fetch('/data/scores.json')
             .then((response) => {
               if (!response.ok)
-                throw new Error("HTTP error " + response.status);
+                throw new Error('HTTP error ' + response.status);
               return response.json();
             })
             .then((data) => {
-              const { scores, lastUpdate } = data;
-              this.results = scores;
+              const { scores, nextMatchStats, lastUpdate } = data;
               const dateObject = new Date(lastUpdate);
               const day = dateObject.getDate();
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hours = dateObject.getHours();
               const minutes = dateObject.getMinutes();
-              this.lastUpdate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+
+              this.results = scores;
+              this.nextMatchStats = nextMatchStats;
+              this.lastUpdate =
+                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
             });
-        },
+        }
       });
     </script>
 

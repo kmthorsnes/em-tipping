@@ -35,10 +35,15 @@ scoresArray.sort((a, b) => {
   else return 0;
 });
 
+// get next match stats
+console.log('Getting next match stats...');
+const nextMatchStats = getNextMatchStats();
+
 // write file in json format
 console.log('Writing to file scores.json ...');
 const jsonData = JSON.stringify({
   scores: scoresArray,
+  nextMatchStats,
   lastUpdate: new Date()
 });
 fs.writeFileSync('./data/scores.json', jsonData);
@@ -113,4 +118,35 @@ function calcTopScorers(name) {
   for (let team of topPredictions) {
     if (topResults.includes(team)) scores[name] += 15;
   }
+}
+
+function getNextMatchStats() {
+  const statsObj = {};
+  const stats = [];
+  // next match with empty result
+  const nextMatch = results.groupStageMatches.find((x) => !x.result).match;
+
+  for (let name of names) {
+    const prediction = predictions[name].groupStageMatches.find(
+      (x) => x.match === nextMatch
+    ).result;
+    if (statsObj[prediction]) statsObj[prediction]++;
+    else statsObj[prediction] = 1;
+  }
+
+  // turn object to array of objects and sort
+  for (let stat of Object.keys(statsObj)) {
+    const result = { stat, freq: statsObj[stat] };
+    stats.push(result);
+  }
+  stats.sort((a, b) => {
+    if (a.freq < b.freq) return 1;
+    else if (a.freq > b.freq) return -1;
+    else return 0;
+  });
+
+  return {
+    nextMatch,
+    stats
+  };
 }
