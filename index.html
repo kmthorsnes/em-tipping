@@ -42,12 +42,8 @@
             Rangering:
           </h2>
           <div class="mx-8">
-            <ol
-              v-for="result in results"
-              :key="result.point"
-              class="mx-10"
-            >
-              <li class="font-mono">{{result.name}}:  {{result.points}}</li>
+            <ol v-for="result in results" :key="result.point" class="mx-10">
+              <li class="font-mono">{{result.name}}: {{result.points}}</li>
             </ol>
           </div>
           <p class="text-center font-mono font-extralight">
@@ -61,18 +57,18 @@
         el: "#app",
         data: {
           results: [
-            { name: "Anders", points:     0 + (1+0) + (1+2)},
-            { name: "Bahador", points:    0 + (0+0) + (0 +0)},
-            { name: "Caroline", points:   0 + (1+0)+ (0 +0)},
-            { name: "Christina", points:  0 + (1+0)+ (0 +0)},
-            { name: "Elin", points:       0 + (1+0)+ (0 +0)},
-            { name: "Joakim", points:     0 + (1+0)+ (0 +0)},
-            { name: "Kalle", points:      0 + (1+0)+ (0 +0)},
-            { name: "Karoline", points:   0 + (1+0)+ (1 +0)},
-            { name: "Kristian", points:   0 + (1+0)+ (0 +0)},
-            { name: "Louise", points:     0 + (1+0)+ (0 +0)},
-            { name: "Stian", points:      0 + (1+0)+ (0 +0)},
-            { name: "Tormod", points:     0 + (1+0)+ (0 +0)},
+            { name: "Anders", points: 5 },
+            { name: "Bahador", points: 1 },
+            { name: "Caroline", points: 2 },
+            { name: "Christina", points: 2 },
+            { name: "Elin", points: 3 },
+            { name: "Joakim", points: 2 },
+            { name: "Kalle", points: 2 },
+            { name: "Karoline", points: 3 },
+            { name: "Kristian", points: 2 },
+            { name: "Louise", points: 2 },
+            { name: "Stian", points: 2 },
+            { name: "Tormod", points: 4 },
           ],
           lastUpdate: "12. juni 2020 16:58 ",
         },
