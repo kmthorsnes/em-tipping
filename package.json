@@ -1,0 +1,23 @@
+{
+  "name": "em-tipping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "convert": "node helpers/converter.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmthorsnes/em-tipping.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kmthorsnes/em-tipping/issues"
+  },
+  "homepage": "https://github.com/kmthorsnes/em-tipping#readme",
+  "devDependencies": {
+    "xlsx": "^0.17.0"
+  }
+}

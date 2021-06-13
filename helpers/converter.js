@@ -168,13 +168,14 @@ function predict(name) {
 }
 
 for (let name of names) {
+  console.log(`Importing ${name}.xlsx ...`)
   predictionData[name] = predict(name);
 }
 
-console.log('Imported Excel files into memory...');
+console.log('\n\nImported Excel files into memory.');
 
 // write file in json format
 const jsonData = JSON.stringify(predictionData);
 fs.writeFileSync('./data/predictions.json', jsonData);
 
-console.log('Wrote to JSON file.');
+console.log('Wrote to file predictions.json\nDone!\n');
