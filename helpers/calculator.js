@@ -37,8 +37,12 @@ scoresArray.sort((a, b) => {
 
 // Add ranking to scoresArray
 let ranking = 1;
+let counter = 0;
 scoresArray.forEach((s, idx) => {
-  if (idx !== 0 && s.score !== scoresArray[idx - 1].score) ranking++;
+  if (idx !== 0 && s.score !== scoresArray[idx - 1].score) {
+    ranking += counter;
+    counter = 1;
+  } else counter++;
   s.ranking = ranking;
 });
 
