@@ -35,6 +35,13 @@ scoresArray.sort((a, b) => {
   else return 0;
 });
 
+// Add ranking to scoresArray
+let ranking = 1;
+scoresArray.forEach((s, idx) => {
+  if (idx !== 0 && s.score !== scoresArray[idx - 1].score) ranking++;
+  s.ranking = ranking;
+});
+
 // get next match stats
 console.log('Getting next match stats...');
 const nextMatchStats = getNextMatchStats();
