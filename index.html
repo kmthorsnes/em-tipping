@@ -32,9 +32,12 @@
               @click="lucasGreeting()"
               src="./assets/img/lucas.png"
               alt=""
-              class="max-h-10 md:max-h-20"
+              class="max-h-10 md:max-h-20 lucas"
             />
-            <h1 class="text-xl text-center font-mono pb-4 font-bold items-center" id="title">
+            <h1
+              class="text-xl text-center font-mono pb-4 font-bold items-center"
+              id="title"
+            >
               Omegas EM-tippekonkurranse
             </h1>
             <img
@@ -43,7 +46,7 @@
               @click.prevent="audio.isPlaying ? pause(audio) : play(audio)"
               src="./assets/img/player.png"
               alt=""
-              class="max-h-10 md:max-h-20"
+              class="max-h-10 md:max-h-20 player"
             />
           </div>
 
@@ -86,7 +89,9 @@
             </div>
             <div class="flex-auto justify-center items-center">
               <div class="ml-8 md:ml-0">
-                <h2 class="pb-2 text-xl font-mono mt-5 font-bold md:text-center">
+                <h2
+                  class="pb-2 text-xl font-mono mt-5 font-bold md:text-center"
+                >
                   Siste resultat:
                 </h2>
                 <p class="font-mono md:text-center">
@@ -105,7 +110,21 @@
                   <source src="/assets/sounds/putain.mp3" />
                 </audio>
                 <div class="flex items-center">
-                  <button @click="farter()" id="fool" class=" mx-auto mt-4 bg-pink-600 hover:bg-pink-400 text-white font-bold py-2 px-4 rounded-full">
+                  <button
+                    @click="farter()"
+                    id="fool"
+                    class="
+                      mx-auto
+                      mt-4
+                      bg-pink-600
+                      hover:bg-pink-400
+                      text-white
+                      font-bold
+                      py-2
+                      px-4
+                      rounded-full
+                    "
+                  >
                     Don't click me
                   </button>
                 </div>
@@ -160,14 +179,25 @@
                 alt=""
               />
             </div>
-            <p class="md:ml-8 text-center font-mono font-extralight text-xs md:text-sm justify-center flex-1 items-center">
+            <p
+              class="
+                md:ml-8
+                text-center
+                font-mono font-extralight
+                text-xs
+                md:text-sm
+                justify-center
+                flex-1
+                items-center
+              "
+            >
               Sist oppdatert: {{ lastUpdate }}
             </p>
             <div class="justify-end flex-1 flex items-center">
               <img
                 src="/assets/img/omega-logo.png"
                 alt=""
-                class="max-h-10 md:max-h-20 "
+                class="max-h-10 md:max-h-20"
               />
             </div>
           </div>
@@ -208,10 +238,10 @@
             audio.isPlaying = false;
             audio.file.pause();
           },
-          farter: function() {
+          farter: function () {
             const fart = new Audio("./assets/sounds/fart.mp3");
             fart.play();
-          }
+          },
         },
         mounted() {
           fetch("/data/scores.json")
@@ -246,6 +276,10 @@
       .francois:hover {
         transform: rotate(360deg);
       }
+      .lucas, .player { 
+        cursor: pointer; 
+      }
+      .
     </style>
   </body>
 </html>
