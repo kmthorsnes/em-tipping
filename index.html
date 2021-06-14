@@ -63,50 +63,53 @@
                     <td class="text-center">{{result.score}}</td>
                   </tr>
                 </table>
+                <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
+                  Siste kamp:
+                </h2>
+                <p class="font-mono">
+                  {{nextMatchStats.lastMatch}}
+                  ({{nextMatchStats.lastMatchResult}})
+                </p>
               </div>
             </div>
             <div v-if="nextMatchStats.nextMatch" class="flex-auto">
               <div class="ml-8">
-                <ol class="ml-10">
-                  <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
-                    Neste kamp:
-                  </h2>
-                  <p class="font-mono">{{nextMatchStats.nextMatch}}</p>
-                  <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
-                    Tippestatistikk:
-                  </h2>
-                  <table class="">
-                    <th colspan="1">
-                      <h2
-                        class="
-                          pb-2
-                          text-md text-left
-                          font-mono
-                          mt-5
-                          mr-5
-                          font-bold
-                        "
-                      >
-                        Resultat
-                      </h2>
-                    </th>
-                    <th>
-                      <h2
-                        class="pb-2 text-md text-left font-mono mt-5 font-bold"
-                      >
-                        Antall spillere
-                      </h2>
-                    </th>
-                    <tr
-                      v-for="(s, idx) in nextMatchStats.stats"
-                      :key="idx"
-                      class="font-mono"
+                <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
+                  Neste kamp:
+                </h2>
+                <p class="font-mono">{{nextMatchStats.nextMatch}}</p>
+                <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
+                  Tippestatistikk:
+                </h2>
+                <table class="">
+                  <th colspan="1">
+                    <h2
+                      class="
+                        pb-2
+                        text-md text-left
+                        font-mono
+                        mt-5
+                        mr-5
+                        font-bold
+                      "
                     >
-                      <td>{{s.stat}}</td>
-                      <td class="text-center">{{s.freq}} spiller(e)</td>
-                    </tr>
-                  </table>
-                </ol>
+                      Resultat
+                    </h2>
+                  </th>
+                  <th>
+                    <h2 class="pb-2 text-md text-left font-mono mt-5 font-bold">
+                      Antall spillere
+                    </h2>
+                  </th>
+                  <tr
+                    v-for="(s, idx) in nextMatchStats.stats"
+                    :key="idx"
+                    class="font-mono"
+                  >
+                    <td>{{s.stat}}</td>
+                    <td class="text-center">{{s.freq}} spiller(e)</td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
@@ -126,19 +129,19 @@
     </div>
     <script>
       var app = new Vue({
-        el: "#app",
+        el: '#app',
         data() {
           return {
             results: [],
             nextMatchStats: {},
-            lastUpdate: "",
+            lastUpdate: ''
           };
         },
         mounted() {
-          fetch("/data/scores.json")
+          fetch('/data/scores.json')
             .then((response) => {
               if (!response.ok)
-                throw new Error("HTTP error " + response.status);
+                throw new Error('HTTP error ' + response.status);
               return response.json();
             })
             .then((data) => {
@@ -148,15 +151,15 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ("0" + hoursUnformated).slice(-2);
+              const hours = ('0' + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ("0" + minutesUnformated).slice(-2);
+              const minutes = ('0' + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
-                day + "/" + month + "/" + year + " " + hours + ":" + minutes;
+                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
             });
-        },
+        }
       });
     </script>
 

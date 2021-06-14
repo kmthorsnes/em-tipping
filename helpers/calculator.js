@@ -134,8 +134,12 @@ function calcTopScorers(name) {
 function getNextMatchStats() {
   const statsObj = {};
   const stats = [];
+  const gsmResults = results.groupStageMatches;
   // next match with empty result
-  const nextMatch = results.groupStageMatches.find((x) => !x.result).match;
+  const nextMatchIdx = gsmResults.findIndex((x) => !x.result);
+  const nextMatch = gsmResults[nextMatchIdx].match;
+  const lastMatch = gsmResults[nextMatchIdx - 1].match;
+  const lastMatchResult = gsmResults[nextMatchIdx - 1].result;
 
   for (let name of names) {
     const prediction = predictions[name].groupStageMatches.find(
@@ -158,6 +162,8 @@ function getNextMatchStats() {
 
   return {
     nextMatch,
-    stats
+    stats,
+    lastMatch,
+    lastMatchResult
   };
 }
