@@ -66,14 +66,25 @@
                     </td>
                   </tr>
                 </table>
-                <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
-                  Siste kamp:
-                </h2>
-                <p class="font-mono">
-                  {{nextMatchStats.lastMatch}}
-                  ({{nextMatchStats.lastMatchResult}})
-                </p>
               </div>
+            </div>
+            <div class="flex-auto">
+              <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
+                Siste resultat:
+              </h2>
+              <p class="font-mono">
+                {{nextMatchStats.lastMatch}}
+                ({{nextMatchStats.lastMatchResult}})
+              </p>
+              <img
+                @mouseover="frenchGreeting()"
+                class="max-h-15 md:max-h-30 md:mt-5 francois"
+                src="/assets/img/francois.png"
+                alt=""
+              />
+              <audio>
+                <source src="/assets/sounds/putain.mp3" />
+              </audio>
             </div>
             <div v-if="nextMatchStats.nextMatch" class="flex-auto">
               <div class="ml-8">
@@ -136,19 +147,25 @@
     </div>
     <script>
       var app = new Vue({
-        el: '#app',
+        el: "#app",
         data() {
           return {
             results: [],
             nextMatchStats: {},
-            lastUpdate: ''
+            lastUpdate: "",
           };
         },
+        methods: {
+          frenchGreeting: function () {
+            const audio = document.getElementsByTagName("audio")[0];
+            audio.play();
+          },
+        },
         mounted() {
-          fetch('/data/scores.json')
+          fetch("/data/scores.json")
             .then((response) => {
               if (!response.ok)
-                throw new Error('HTTP error ' + response.status);
+                throw new Error("HTTP error " + response.status);
               return response.json();
             })
             .then((data) => {
@@ -158,18 +175,25 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ('0' + hoursUnformated).slice(-2);
+              const hours = ("0" + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ('0' + minutesUnformated).slice(-2);
+              const minutes = ("0" + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
-                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+                day + "/" + month + "/" + year + " " + hours + ":" + minutes;
             });
-        }
+        },
       });
     </script>
 
-    <style></style>
+    <style>
+      .francois {
+        transition: 0.7s ease-in-out;
+      }
+      .francois:hover {
+        transform: rotate(360deg);
+      }
+    </style>
   </body>
 </html>
