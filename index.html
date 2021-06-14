@@ -68,20 +68,36 @@
             <div v-if="nextMatchStats.nextMatch" class="flex-auto">
               <div class="ml-8">
                 <ol class="ml-10">
-                  <h2 class="pb-2 text-lg font-mono mt-5 font-bold">
+                  <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
                     Neste kamp:
                   </h2>
                   <p class="font-mono">{{nextMatchStats.nextMatch}}</p>
-                  <h2 class="pb-2 text-lg font-mono mt-5 font-bold">
+                  <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
                     Tippestatistikk:
                   </h2>
-                  <li
-                    v-for="(s, idx) in nextMatchStats.stats"
-                    :key="idx"
-                    class="font-mono"
-                  >
-                    ({{s.stat}}) => {{s.freq}} spiller(e)
-                  </li>
+                  <table class="">
+                    <th colspan="1">
+                      <h2 class="pb-2 text-md text-left font-mono mt-5 mr-5 font-bold">
+                        Resultat
+                      </h2>
+                    </th>
+                    <th>
+                      <h2
+                        class="pb-2 text-md text-left font-mono mt-5 font-bold"
+                      >
+                        Antall spillere
+                      </h2>
+                    </th>
+                    <tr
+                      v-for="(s, idx) in nextMatchStats.stats"
+                      :key="idx"
+                      class="font-mono"
+                    >
+                      <td>({{s.stat}})</td>
+
+                      <td class="text-center">{{s.freq}} spiller(e)</td>
+                    </tr>
+                  </table>
                 </ol>
               </div>
             </div>
