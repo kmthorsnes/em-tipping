@@ -13,6 +13,7 @@ let names = [
   'Caroline',
   'Christina',
   'Elin',
+  'Francois',
   'Joakim',
   'Kalle',
   'Karoline',
