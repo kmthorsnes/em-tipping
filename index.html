@@ -80,7 +80,7 @@
                       <h2
                         class="
                           pb-2
-                          text-md text-left
+                          text-md text-center
                           font-mono
                           mt-5
                           mr-5
@@ -92,7 +92,13 @@
                     </th>
                     <th>
                       <h2
-                        class="pb-2 text-md text-left font-mono mt-5 font-bold"
+                        class="
+                          pb-2
+                          text-md text-center
+                          font-mono
+                          mt-5
+                          font-bold
+                        "
                       >
                         Antall spillere
                       </h2>
@@ -102,7 +108,7 @@
                       :key="idx"
                       class="font-mono"
                     >
-                      <td>{{s.stat}}</td>
+                      <td class="text-center">{{s.stat}}</td>
                       <td class="text-center">{{s.freq}} spiller(e)</td>
                     </tr>
                   </table>
@@ -113,13 +119,17 @@
           <div class="flex text-center place-content-between items-center">
             <img
               src="/assets/img/logo.png"
-              class="max-h-20 text-center"
+              class="max-h-10 md:max-h-20 text-center"
               alt=""
             />
-            <p class="text-center font-mono font-extralight">
+            <p class="text-center font-mono font-extralight text-xs md:text-sm">
               Sist oppdatert: {{ lastUpdate }}
             </p>
-            <img src="/assets/img/omega-logo.png" alt="" class="max-h-20" />
+            <img
+              src="/assets/img/omega-logo.png"
+              alt=""
+              class="max-h-10 md:max-h-20"
+            />
           </div>
         </div>
       </div>
