@@ -27,11 +27,27 @@
             bg-gray-100
           "
         >
-          <h1 class="text-xl text-center font-mono pb-4 font-bold" id="title">
-            Omegas EM-tippekonkurranse
-          </h1>
+          <div class="flex flex-wrap justify-between">
+            <img
+              @click="lucasGreeting()"
+              src="./assets/img/lucas.png"
+              alt=""
+              class="max-h-10 md:max-h-20"
+            />
+            <h1 class="text-xl text-center font-mono pb-4 font-bold" id="title">
+              Omegas EM-tippekonkurranse
+            </h1>
+            <img
+              v-for="audio in audios"
+              :key="audio.id"
+              @click.prevent="audio.isPlaying ? pause(audio) : play(audio)"
+              src="./assets/img/player.png"
+              alt=""
+              class="max-h-10 md:max-h-20"
+            />
+          </div>
 
-          <p class="text-base font-mono mx-10">
+          <p class="text-base font-mono mx-10 pt-2">
             Endelig skal de store spørsmål her i livet besvares:
           </p>
           <div class="mt-5 ml-14">
@@ -70,7 +86,6 @@
             </div>
             <div class="flex-auto">
               <div class="ml-8 md:ml-0">
-              
                 <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
                   Siste resultat:
                 </h2>
@@ -78,7 +93,7 @@
                   {{nextMatchStats.lastMatch}}
                   ({{nextMatchStats.lastMatchResult}})
                 </p>
-            </div>
+              </div>
               <div class="hidden md:block">
                 <img
                   @mouseover="frenchGreeting()"
@@ -89,6 +104,9 @@
                 <audio>
                   <source src="/assets/sounds/putain.mp3" />
                 </audio>
+                <button @click="fucker()" id="fool" class="hidden md:block mt-4 bg-pink-600 hover:bg-pink-400 text-white font-bold py-2 px-4 rounded-full">
+                  Don't touch me
+                </button>
               </div>
             </div>
             <div v-if="nextMatchStats.nextMatch" class="flex-auto">
@@ -158,6 +176,13 @@
             results: [],
             nextMatchStats: {},
             lastUpdate: "",
+            audios: [
+              {
+                id: "music",
+                file: new Audio("./assets/sounds/music/music.mp3"),
+                isPlaying: false,
+              },
+            ],
           };
         },
         methods: {
@@ -165,6 +190,21 @@
             const audio = new Audio("./assets/sounds/putain.mp3");
             audio.play();
           },
+          lucasGreeting: function () {
+            const lucasHello = new Audio("./assets/sounds/bark3.mp3");
+            lucasHello.play();
+          },
+          play(audio) {
+            audio.isPlaying = true;
+            audio.file.play();
+          },
+          pause(audio) {
+            audio.isPlaying = false;
+            audio.file.pause();
+          },
+          fucker: function() {
+            alert(":(")
+          }
         },
         mounted() {
           fetch("/data/scores.json")
