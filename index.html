@@ -14,7 +14,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="bg-black h-screen pt-3">
+      <div class="bg-black h-auto pt-3 pb-3 h-full">
         <div
           class="
             wrapper
@@ -28,7 +28,7 @@
             text-white
           "
         >
-          <div class="flex flex-wrap justify-between">
+          <div class="flex sm:flex-wrap justify-between">
             <img
               @click="lucasGreeting()"
               src="./assets/img/lucas.png"
@@ -51,18 +51,20 @@
             />
           </div>
 
-          <p class="text-base font-mono mx-10 pt-2">
-            Endelig skal de store spørsmål her i livet besvares:
-          </p>
-          <div class="mt-5 ml-14">
-            <ul class="list-disc font-mono">
-              <li>Hvem i Omega er best til å tippe?</li>
-              <li>Hvilket europeisk land er best til å spille fotball?</li>
-            </ul>
+          <div class="">
+            <p class="text-base font-mono ml-8 md:mx-10 pt-2 md:text-center">
+              Endelig skal de store spørsmål her i livet besvares:
+            </p>
+            <div class="mt-5 ml-14 md:ml-28">
+              <ul class="list-disc font-mono">
+                <li>Hvem i Omega er best til å tippe?</li>
+                <li>Hvilket europeisk land er best til å spille fotball?</li>
+              </ul>
+            </div>
           </div>
-          <div class="flex flex-wrap mb-5">
-            <div class="flex-auto">
-              <div class="mx-8">
+          <div class="flex sm:flex-wrap mb-5 flex-col md:flex-row">
+            <div class="md:flex-auto flex justify-center items-center">
+              <div class="md:mx-8">
                 <table class="mx-10">
                   <th colspan="2">
                     <h2 class="pb-2 text-lg text-left font-mono mt-5 font-bold">
@@ -88,8 +90,8 @@
                 </table>
               </div>
             </div>
-            <div class="flex-auto justify-center items-center">
-              <div class="ml-8 md:ml-0">
+            <div class="md:flex-col flex justify-center items-center" >
+              <div class="ml-11">
                 <h2
                   class="pb-2 text-xl font-mono mt-5 font-bold md:text-center"
                 >
@@ -129,7 +131,7 @@
                 </div>
               </div>
             </div>
-            <div v-if="nextMatchStats.nextMatch" class="flex-auto">
+            <div v-if="nextMatchStats.nextMatch" class="md:flex-auto flex justify-center items-center">
               <div class="ml-8">
                 <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
                   Neste kamp:
