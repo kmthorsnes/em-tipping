@@ -13,4 +13,6 @@
 
 In case there are new Excel files, add them with the current naming convention: `EURO 2021 TIL UTFYLLING + " " + [player name].xlsx`
 
+Also add `[player name]` to the `names` array in `/helpers/converter.js`
+
 Then, from the project root folder run: `npm run convert`
