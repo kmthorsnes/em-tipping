@@ -21,12 +21,18 @@ for (let name of names) {
   calcfinal(name);
   calcChampion(name);
   calcTopScorers(name);
+  calcLastScore(name);
 }
 
+console.log(scores);
 // turn object to array of objects and sort
 const scoresArray = [];
 for (let name of Object.keys(scores)) {
-  const result = { name, score: scores[name] };
+  const result = {
+    name,
+    score: scores[name].totalScore,
+    lastScore: scores[name].lastScore
+  };
   scoresArray.push(result);
 }
 scoresArray.sort((a, b) => {
@@ -68,16 +74,21 @@ console.log('Done!\n');
 // ///////////
 
 function initializeScore(name) {
-  if (!scores[name]) scores[name] = 0;
+  if (!scores[name]) {
+    scores[name] = {
+      totalScore: 0
+    };
+  }
 }
 
 function calcGroupStageMatches(name) {
   const matchPredictions = predictions[name].groupStageMatches;
   const matchResults = results.groupStageMatches;
   for (let j in matchPredictions) {
-    if (matchPredictions[j].hub === matchResults[j].hub) scores[name]++;
+    if (matchPredictions[j].hub === matchResults[j].hub)
+      scores[name].totalScore++;
     if (matchPredictions[j].result === matchResults[j].result)
-      scores[name] += 2;
+      scores[name].totalScore += 2;
   }
 }
 
@@ -88,7 +99,7 @@ function calcGroupStageStandings(name) {
     // for each group A,B,...,F
     const group = standingPredictions[j];
     for (let idx in group) {
-      if (group[idx] === standingResults[j][idx]) scores[name] += 3;
+      if (group[idx] === standingResults[j][idx]) scores[name].totalScore += 3;
     }
   }
 }
@@ -97,7 +108,7 @@ function calcQuarterfinal(name) {
   const quarterPredictions = predictions[name].quarterfinal;
   const quarterResults = results.quarterfinal;
   for (let team of quarterPredictions) {
-    if (quarterResults.includes(team)) scores[name] += 6;
+    if (quarterResults.includes(team)) scores[name].totalScore += 6;
   }
 }
 
@@ -105,7 +116,7 @@ function calcSemifinal(name) {
   const semiPredictions = predictions[name].semifinal;
   const semiResults = results.semifinal;
   for (let team of semiPredictions) {
-    if (semiResults.includes(team)) scores[name] += 8;
+    if (semiResults.includes(team)) scores[name].totalScore += 8;
   }
 }
 
@@ -113,21 +124,36 @@ function calcfinal(name) {
   const finalPredictions = predictions[name].final;
   const finalResults = results.final;
   for (let team of finalPredictions) {
-    if (finalResults.includes(team)) scores[name] += 12;
+    if (finalResults.includes(team)) scores[name].totalScore += 12;
   }
 }
 
 function calcChampion(name) {
   const champPrediction = predictions[name].champion;
   const champResult = results.champion;
-  if (champPrediction === champResult) scores[name] += 15;
+  if (champPrediction === champResult) scores[name].totalScore += 15;
 }
 
 function calcTopScorers(name) {
   const topPredictions = predictions[name].topScorers;
   const topResults = results.topScorers;
   for (let team of topPredictions) {
-    if (topResults.includes(team)) scores[name] += 15;
+    if (topResults.includes(team)) scores[name].totalScore += 15;
+  }
+}
+
+function calcLastScore(name) {
+  const gsm = predictions[name].groupStageMatches;
+  const gsmResults = results.groupStageMatches;
+  // get last match
+  const lastMatchIdx = gsmResults.findIndex((x) => !x.result) - 1;
+  const lastMatch = gsmResults[lastMatchIdx];
+  if (gsm[lastMatchIdx].result === lastMatch.result) {
+    scores[name].lastScore = 3;
+  } else if (gsm[lastMatchIdx].hub === lastMatch.hub) {
+    scores[name].lastScore = 1;
+  } else {
+    scores[name].lastScore = 0;
   }
 }
 
@@ -141,6 +167,7 @@ function getNextMatchStats() {
   const lastMatch = gsmResults[nextMatchIdx - 1].match;
   const lastMatchResult = gsmResults[nextMatchIdx - 1].result;
 
+  // get predictions for next match
   for (let name of names) {
     const prediction = predictions[name].groupStageMatches.find(
       (x) => x.match === nextMatch

@@ -48,7 +48,7 @@
                       Rangering
                     </h2>
                   </th>
-                  <th>
+                  <th class="pl-3">
                     <h2 class="pb-2 text-lg text-left font-mono mt-5 font-bold">
                       Poeng
                     </h2>
@@ -60,7 +60,9 @@
                   >
                     <td>{{result.ranking}}.</td>
                     <td>{{result.name}}</td>
-                    <td class="text-center">{{result.score}}</td>
+                    <td class="text-center pl-3">
+                      {{result.score}} ({{result.lastScore}})
+                    </td>
                   </tr>
                 </table>
                 <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
