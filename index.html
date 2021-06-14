@@ -41,18 +41,27 @@
           <div class="flex flex-wrap mb-5">
             <div class="flex-auto">
               <div class="mx-8">
-                <ol class="mx-10">
-                  <h2 class="pb-2 text-lg font-mono mt-5 font-bold">
-                    Rangering:
-                  </h2>
-                  <li
+                <table class="mx-10">
+                  <th colspan="2">
+                    <h2 class="pb-2 text-lg text-left font-mono mt-5 font-bold">
+                      Rangering
+                    </h2>
+                  </th>
+                  <th>
+                    <h2 class="pb-2 text-lg text-left font-mono mt-5 font-bold">
+                      Poeng
+                    </h2>
+                  </th>
+                  <tr
                     v-for="(result, idx) in results"
                     :key="idx"
                     class="font-mono"
                   >
-                    {{result.name}}: {{result.score}}
-                  </li>
-                </ol>
+                    <td>{{idx+1}}.</td>
+                    <td>{{result.name}}:</td>
+                    <td class="text-center">{{result.score}}</td>
+                  </tr>
+                </table>
               </div>
             </div>
             <div v-if="nextMatchStats.nextMatch" class="flex-auto">
@@ -106,9 +115,9 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ("0" + hoursUnformated).slice(-2);
+              const hours = ('0' + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ("0" + minutesUnformated).slice(-2);
+              const minutes = ('0' + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
