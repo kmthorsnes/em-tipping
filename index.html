@@ -29,6 +29,7 @@
           <h1 class="text-xl text-center font-mono pb-4 font-bold" id="title">
             Omegas EM-tippekonkurranse
           </h1>
+
           <p class="text-base font-mono mx-10">
             Endelig skal de store spørsmål her i livet besvares:
           </p>
@@ -85,27 +86,35 @@
               </div>
             </div>
           </div>
-          <p class="text-center font-mono font-extralight">
-            Sist oppdatert: {{ lastUpdate }}
-          </p>
+          <div class="flex text-center place-content-between items-center">
+            <img
+              src="/assets/img/logo.png"
+              class="max-h-20 text-center"
+              alt=""
+            />
+            <p class="text-center font-mono font-extralight">
+              Sist oppdatert: {{ lastUpdate }}
+            </p>
+            <img src="/assets/img/omega-logo.png" alt="" class="max-h-20" />
+          </div>
         </div>
       </div>
     </div>
     <script>
       var app = new Vue({
-        el: '#app',
+        el: "#app",
         data() {
           return {
             results: [],
             nextMatchStats: {},
-            lastUpdate: ''
+            lastUpdate: "",
           };
         },
         mounted() {
-          fetch('/data/scores.json')
+          fetch("/data/scores.json")
             .then((response) => {
               if (!response.ok)
-                throw new Error('HTTP error ' + response.status);
+                throw new Error("HTTP error " + response.status);
               return response.json();
             })
             .then((data) => {
@@ -115,15 +124,15 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ('0' + hoursUnformated).slice(-2);
+              const hours = ("0" + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ('0' + minutesUnformated).slice(-2);
+              const minutes = ("0" + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
-                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+                day + "/" + month + "/" + year + " " + hours + ":" + minutes;
             });
-        }
+        },
       });
     </script>
 
