@@ -14,7 +14,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="bg-red-100 h-screen pt-3">
+      <div class="bg-black h-screen pt-3">
         <div
           class="
             wrapper
@@ -22,9 +22,10 @@
             p-5
             container
             mx-auto
-            border-solid border-4 border-pink-600
+            border-solid border-4 omega-border
             rounded
-            bg-gray-100
+            bg-black
+            text-white
           "
         >
           <div class="flex flex-wrap justify-between">
@@ -35,7 +36,7 @@
               class="max-h-10 md:max-h-20 lucas"
             />
             <h1
-              class="text-xl text-center font-mono pb-4 font-bold items-center"
+              class="text-xl text-whitetext-center font-mono pb-4 font-bold items-center"
               id="title"
             >
               Omegas EM-tippekonkurranse
@@ -116,8 +117,6 @@
                     class="
                       mx-auto
                       mt-4
-                      bg-pink-600
-                      hover:bg-pink-400
                       text-white
                       font-bold
                       py-2
@@ -195,7 +194,7 @@
             </p>
             <div class="justify-end flex-1 flex items-center">
               <img
-                src="/assets/img/omega-logo.png"
+                src="/assets/img/omegalogo2.png"
                 alt=""
                 class="max-h-10 md:max-h-20"
               />
@@ -279,7 +278,19 @@
       .lucas, .player { 
         cursor: pointer; 
       }
-      .
+      .lucas {
+        border-bottom: 2px solid #ffa31a;
+      }
+      .omega-border {
+        border-color: #ffa31a
+      }
+      #fool {
+        background-color: #ffa31a;
+      }
+      .omega-background {
+        background-color: #808080;
+      }
+      
     </style>
   </body>
 </html>
