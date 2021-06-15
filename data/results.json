@@ -10,7 +10,7 @@
     { "match": "Skottland - Tsjekkia", "result": "0 - 2", "hub": "B" },
     { "match": "Polen - Slovakia", "result": "1 - 2", "hub": "B" },
     { "match": "Spania - Sverige", "result": "0 - 0", "hub": "U" },
-    { "match": "Ungarn - Portugal", "result": "", "hub": "" },
+    { "match": "Ungarn - Portugal", "result": "0 - 3", "hub": "B" },
     { "match": "Frankrike - Tyskland", "result": "", "hub": "" },
     { "match": "Finland - Russland", "result": "", "hub": "" },
     { "match": "Tyrkia - Wales", "result": "", "hub": "" },
