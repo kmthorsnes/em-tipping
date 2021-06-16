@@ -13,7 +13,7 @@
     { "match": "Ungarn - Portugal", "result": "0 - 3", "hub": "B" },
     { "match": "Frankrike - Tyskland", "result": "1 - 0", "hub": "H" },
     { "match": "Finland - Russland", "result": "0 - 1", "hub": "B" },
-    { "match": "Tyrkia - Wales", "result": "", "hub": "" },
+    { "match": "Tyrkia - Wales", "result": "0 - 2", "hub": "B" },
     { "match": "Italia - Sveits", "result": "", "hub": "" },
     { "match": "Ukraina - Nord-Makedonia", "result": "", "hub": "" },
     { "match": "Danmark - Belgia", "result": "", "hub": "" },
