@@ -17,7 +17,7 @@
     { "match": "Italia - Sveits", "result": "3 - 0", "hub": "H" },
     { "match": "Ukraina - Nord-Makedonia", "result": "2 - 1", "hub": "H" },
     { "match": "Danmark - Belgia", "result": "1 - 2", "hub": "B" },
-    { "match": "Nederland - Østerrike", "result": "", "hub": "" },
+    { "match": "Nederland - Østerrike", "result": "2 - 0", "hub": "H" },
     { "match": "Sverige - Slovakia", "result": "", "hub": "" },
     { "match": "Kroatia - Tsjekkia", "result": "", "hub": "" },
     { "match": "England - Skottland", "result": "", "hub": "" },
