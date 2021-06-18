@@ -110,7 +110,7 @@
                   alt=""
                 />
                 <audio>
-                  <source src="/assets/sounds/pokemon.mp3" />
+                  <audio id="pokemonSound" src="/assets/sounds/pokemon.mp3" muted></audio>
                 </audio>
                 <div class="flex items-center">
                   <button
@@ -228,8 +228,8 @@
             audio.play();
           },
           pokemonGreeting: function () {
-            const audio = new Audio("./assets/sounds/pokemon.mp3");
-            audio.play();
+            document.getElementById('pokemonSound').muted = false;
+            document.getElementById('pokemonSound').play();
           },
           lucasGreeting: function () {
             const lucasHello = new Audio("./assets/sounds/bark3.mp3");
