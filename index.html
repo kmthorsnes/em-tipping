@@ -11,6 +11,10 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>
     <div id="app">
@@ -22,7 +26,8 @@
             p-5
             container
             mx-auto
-            border-solid border-4 omega-border
+            border-solid border-4
+            omega-border
             rounded
             bg-black
             text-white
@@ -36,7 +41,13 @@
               class="max-h-10 md:max-h-20 lucas"
             />
             <h1
-              class="text-xl text-whitetext-center font-mono pb-4 font-bold items-center"
+              class="
+                text-xl text-whitetext-center
+                font-mono
+                pb-4
+                font-bold
+                items-center
+              "
               id="title"
             >
               Omegas EM-tippekonkurranse
@@ -90,7 +101,7 @@
                 </table>
               </div>
             </div>
-            <div class="flex-col flex justify-center items-center" >
+            <div class="flex-col flex justify-center items-center">
               <div class="ml-11">
                 <h2
                   class="pb-2 text-xl font-mono mt-5 font-bold md:text-center"
@@ -110,7 +121,11 @@
                   alt=""
                 />
                 <audio>
-                  <audio id="pokemonSound" src="/assets/sounds/pokemon.mp3" muted></audio>
+                  <audio
+                    id="pokemonSound"
+                    src="/assets/sounds/pokemon.mp3"
+                    muted
+                  ></audio>
                 </audio>
                 <div class="flex items-center">
                   <button
@@ -131,7 +146,10 @@
                 </div>
               </div>
             </div>
-            <div v-if="nextMatchStats.nextMatch" class="md:flex-auto flex justify-center items-center">
+            <div
+              v-if="nextMatchStats.nextMatch"
+              class="md:flex-auto flex justify-center items-center"
+            >
               <div class="ml-8">
                 <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
                   Neste kamp:
@@ -228,8 +246,8 @@
             audio.play();
           },
           pokemonGreeting: function () {
-            document.getElementById('pokemonSound').muted = false;
-            document.getElementById('pokemonSound').play();
+            document.getElementById("pokemonSound").muted = false;
+            document.getElementById("pokemonSound").play();
           },
           lucasGreeting: function () {
             const lucasHello = new Audio("./assets/sounds/bark3.mp3");
@@ -285,21 +303,22 @@
         transition: 0.2s ease-in-out;
       }
       .christina:hover {
-        transform: scale(3.0)
+        transform: scale(3);
       }
-      .lucas, .player { 
-        cursor: pointer; 
-        transition: transform .2s;
-
+      .lucas,
+      .player {
+        cursor: pointer;
+        transition: transform 0.2s;
       }
-      .lucas:hover, .player:hover {
+      .lucas:hover,
+      .player:hover {
         transform: scale(1.2);
       }
       .lucas {
         border-bottom: 2px solid #ffa31a;
       }
       .omega-border {
-        border-color: #ffa31a
+        border-color: #ffa31a;
       }
       #fool {
         background-color: #ffa31a;
@@ -307,7 +326,6 @@
       .omega-background {
         background-color: #808080;
       }
-      
     </style>
   </body>
 </html>
