@@ -19,7 +19,7 @@
     { "match": "Danmark - Belgia", "result": "1 - 2", "hub": "B" },
     { "match": "Nederland - Østerrike", "result": "2 - 0", "hub": "H" },
     { "match": "Sverige - Slovakia", "result": "1 - 0", "hub": "H" },
-    { "match": "Kroatia - Tsjekkia", "result": "", "hub": "" },
+    { "match": "Kroatia - Tsjekkia", "result": "1 - 1", "hub": "U" },
     { "match": "England - Skottland", "result": "", "hub": "" },
     { "match": "Ungarn - Frankrike", "result": "", "hub": "" },
     { "match": "Portugal - Tyskland", "result": "", "hub": "" },
