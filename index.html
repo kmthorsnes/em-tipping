@@ -79,13 +79,24 @@
               <div class="md:mx-8">
                 <table class="mx-10">
                   <th colspan="2">
-                    <h2 class="pb-2 text-lg text-left font-mono mt-5 font-bold">
+                    <h2
+                      class="pb-2 text-base text-left font-mono mt-5 font-bold"
+                    >
                       Rangering
                     </h2>
                   </th>
                   <th class="pl-3">
-                    <h2 class="pb-2 text-lg text-left font-mono mt-5 font-bold">
+                    <h2
+                      class="pb-2 text-base text-left font-mono mt-5 font-bold"
+                    >
                       Poeng
+                    </h2>
+                  </th>
+                  <th class="pl-3">
+                    <h2
+                      class="pb-2 text-base text-left font-mono mt-5 font-bold"
+                    >
+                      Detaljer<sup>*</sup>
                     </h2>
                   </th>
                   <tr
@@ -98,8 +109,26 @@
                     <td class="text-center pl-3">
                       {{result.score}} ({{result.lastScore}})
                     </td>
+                    <td class="text-xs px-1">
+                      <span class="text-indigo-500">{{result.groupStage}}</span
+                      >+<span class="text-blue-600">{{result.gsStandings}}</span
+                      >+<span class="text-blue-400">{{result.quarter}}</span
+                      >+<span class="text-green-400">{{result.semi}}</span
+                      >+<span class="text-yellow-200">{{result.final}}</span
+                      >+<span class="text-yellow-500">{{result.champion}}</span
+                      >+<span class="text-red-400">{{result.topScorers}}</span>
+                    </td>
                   </tr>
                 </table>
+                <div class="text-xs px-1">
+                  *<span class="text-indigo-500">Gruppespill</span>,
+                  <span class="text-blue-600">Plassering</span>,
+                  <span class="text-blue-400">Kvartfinaler</span>,
+                  <span class="text-green-400">Semifinaler</span>,
+                  <span class="text-yellow-200">Finale</span>,
+                  <span class="text-yellow-500">Mester</span>,
+                  <span class="text-red-400">Toppscorer</span>
+                </div>
               </div>
             </div>
             <div class="flex-col flex justify-center items-center">
@@ -229,32 +258,32 @@
     </div>
     <script>
       var app = new Vue({
-        el: "#app",
+        el: '#app',
         data() {
           return {
             results: [],
             nextMatchStats: {},
-            lastUpdate: "",
+            lastUpdate: '',
             audios: [
               {
-                id: "music",
-                file: new Audio("./assets/sounds/music/music.mp3"),
-                isPlaying: false,
-              },
-            ],
+                id: 'music',
+                file: new Audio('./assets/sounds/music/music.mp3'),
+                isPlaying: false
+              }
+            ]
           };
         },
         methods: {
           frenchGreeting: function () {
-            const audio = new Audio("./assets/sounds/putain.mp3");
+            const audio = new Audio('./assets/sounds/putain.mp3');
             audio.play();
           },
           pokemonGreeting: function () {
-            document.getElementById("pokemonSound").muted = false;
-            document.getElementById("pokemonSound").play();
+            document.getElementById('pokemonSound').muted = false;
+            document.getElementById('pokemonSound').play();
           },
           lucasGreeting: function () {
-            const lucasHello = new Audio("./assets/sounds/bark3.mp3");
+            const lucasHello = new Audio('./assets/sounds/bark3.mp3');
             lucasHello.play();
           },
           play(audio) {
@@ -266,15 +295,15 @@
             audio.file.pause();
           },
           farter: function () {
-            const fart = new Audio("./assets/sounds/fart.mp3");
+            const fart = new Audio('./assets/sounds/fart.mp3');
             fart.play();
-          },
+          }
         },
         mounted() {
-          fetch("/data/scores.json")
+          fetch('/data/scores.json')
             .then((response) => {
               if (!response.ok)
-                throw new Error("HTTP error " + response.status);
+                throw new Error('HTTP error ' + response.status);
               return response.json();
             })
             .then((data) => {
@@ -284,15 +313,15 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ("0" + hoursUnformated).slice(-2);
+              const hours = ('0' + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ("0" + minutesUnformated).slice(-2);
+              const minutes = ('0' + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
-                day + "/" + month + "/" + year + " " + hours + ":" + minutes;
+                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
             });
-        },
+        }
       });
     </script>
 
