@@ -26,8 +26,8 @@
     { "match": "Spania - Polen", "result": "1 - 1", "hub": "U" },
     { "match": "Sveits - Tyrkia", "result": "3 - 1", "hub": "H" },
     { "match": "Italia - Wales", "result": "1 - 0", "hub": "H" },
-    { "match": "Nord-Makedonia - Nederland", "result": "", "hub": "" },
-    { "match": "Ukraina - Østerrike", "result": "", "hub": "" },
+    { "match": "Nord-Makedonia - Nederland", "result": "0 - 3", "hub": "B" },
+    { "match": "Ukraina - Østerrike", "result": "0 - 1", "hub": "B" },
     { "match": "Russland - Danmark", "result": "", "hub": "" },
     { "match": "Finland - Belgia", "result": "", "hub": "" },
     { "match": "Kroatia - Skottland", "result": "", "hub": "" },
@@ -38,9 +38,9 @@
     { "match": "Tyskland - Ungarn", "result": "", "hub": "" }
   ],
   "groupStageResults": {
-    "A": ["", "", "", ""],
+    "A": ["Italia", "Wales", "Sveits", "Tyrkia"],
     "B": ["", "", "", ""],
-    "C": ["", "", "", ""],
+    "C": ["Nederland", "Østerrike", "Ukraina", "Nord-Makedonia"],
     "D": ["", "", "", ""],
     "E": ["", "", "", ""],
     "F": ["", "", "", ""]

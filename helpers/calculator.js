@@ -31,7 +31,14 @@ for (let name of Object.keys(scores)) {
   const result = {
     name,
     score: scores[name].totalScore,
-    lastScore: scores[name].lastScore
+    lastScore: scores[name].lastScore,
+    groupStage: scores[name].groupStage,
+    gsStandings: scores[name].gsStandings,
+    quarter: scores[name].quarter,
+    semi: scores[name].semi,
+    final: scores[name].final,
+    champion: scores[name].champion,
+    topScorers: scores[name].topScorers
   };
   scoresArray.push(result);
 }
@@ -90,16 +97,21 @@ function calcGroupStageMatches(name) {
     if (matchPredictions[j].result === matchResults[j].result)
       scores[name].totalScore += 2;
   }
+  scores[name].groupStage = scores[name].totalScore;
 }
 
 function calcGroupStageStandings(name) {
   const standingPredictions = predictions[name].groupStageResults;
   const standingResults = results.groupStageResults;
+  scores[name].gsStandings = 0;
   for (let j of Object.keys(standingPredictions)) {
     // for each group A,B,...,F
     const group = standingPredictions[j];
     for (let idx in group) {
-      if (group[idx] === standingResults[j][idx]) scores[name].totalScore += 3;
+      if (group[idx] === standingResults[j][idx]) {
+        scores[name].totalScore += 3;
+        scores[name].gsStandings += 3;
+      }
     }
   }
 }
@@ -107,38 +119,58 @@ function calcGroupStageStandings(name) {
 function calcQuarterfinal(name) {
   const quarterPredictions = predictions[name].quarterfinal;
   const quarterResults = results.quarterfinal;
+  scores[name].quarter = 0;
   for (let team of quarterPredictions) {
-    if (quarterResults.includes(team)) scores[name].totalScore += 6;
+    if (quarterResults.includes(team)) {
+      scores[name].totalScore += 6;
+      scores[name].quarter += 6;
+    }
   }
 }
 
 function calcSemifinal(name) {
   const semiPredictions = predictions[name].semifinal;
   const semiResults = results.semifinal;
+  scores[name].semi = 0;
   for (let team of semiPredictions) {
-    if (semiResults.includes(team)) scores[name].totalScore += 8;
+    if (semiResults.includes(team)) {
+      scores[name].totalScore += 8;
+      scores[name].semi += 8;
+    }
   }
 }
 
 function calcfinal(name) {
   const finalPredictions = predictions[name].final;
   const finalResults = results.final;
+  scores[name].final = 0;
   for (let team of finalPredictions) {
-    if (finalResults.includes(team)) scores[name].totalScore += 12;
+    if (finalResults.includes(team)) {
+      scores[name].totalScore += 12;
+      scores[name].semi += 12;
+    }
   }
 }
 
 function calcChampion(name) {
   const champPrediction = predictions[name].champion;
   const champResult = results.champion;
-  if (champPrediction === champResult) scores[name].totalScore += 15;
+  scores[name].champion = 0;
+  if (champPrediction === champResult) {
+    scores[name].totalScore += 15;
+    scores[name].champion += 15;
+  }
 }
 
 function calcTopScorers(name) {
   const topPredictions = predictions[name].topScorers;
   const topResults = results.topScorers;
+  scores[name].topScorers = 0;
   for (let team of topPredictions) {
-    if (topResults.includes(team)) scores[name].totalScore += 15;
+    if (topResults.includes(team)) {
+      scores[name].totalScore += 15;
+      scores[name].topScorers += 15;
+    }
   }
 }
 
