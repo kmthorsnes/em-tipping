@@ -53,14 +53,14 @@
             >
               Omegas EM-tippekonkurranse
             </h1>
-            <img
+            <!-- <img
               v-for="audio in audios"
               :key="audio.id"
               @click.prevent="audio.isPlaying ? pause(audio) : play(audio)"
               src="./assets/img/player.png"
               alt=""
               class="max-h-10 md:max-h-20 player"
-            />
+            /> -->
           </div>
 
           <div class="">
@@ -146,8 +146,8 @@
               <div class="flex flex-col items-center">
                 <img
                   @mouseover="pokemonGreeting()"
-                  class="max-h-15 md:max-h-30 md:mt-5 christina mx-auto"
-                  src="/assets/img/christina.png"
+                  class="max-h-15 md:max-h-32 md:mt-5 ronaldo mx-auto"
+                  src="/assets/img/ronaldo.png"
                   alt=""
                   loading="lazy"
                 />
@@ -159,23 +159,13 @@
                   ></audio>
                 </audio>
                 <div class="flex items-center">
-                  <button class="push--skeuo"></button>
+                  <!-- <button class="push--skeuo"></button> -->
 
-                  <!-- <button
-                    @click="farter()"
-                    id="fool"
-                    class="
-                      mx-auto
-                      mt-4
-                      text-white
-                      font-bold
-                      py-2
-                      px-4
-                      rounded-full
-                    "
-                  >
-                    Don't click me
-                  </button> -->
+                  <button
+                    class=" mx-auto
+                    mt-4 text-white font-bold py-2 px-4 rounded-full " > Don't
+                    click me
+                  </button>
                 </div>
               </div>
             </div>
@@ -293,11 +283,52 @@
                 isPlaying: false,
               },
             ],
+            activeFart: null,
             farts: [
               {
                 id: "fart1",
-                file: new Audio("./assets/img/farts/fart1.mp3"),
-                isPlaying: false,
+                file: new Audio("./assets/sounds/farts/fart1.mp3"),
+                isFarting: false,
+              },
+              {
+                id: "fart2",
+                file: new Audio("./assets/sounds/farts/fart2.mp3"),
+                isFarting: false,
+              },
+              {
+                id: "fart3",
+                file: new Audio("./assets/sounds/farts/fart3.mp3"),
+                isFarting: false,
+              },
+              {
+                id: "fart4",
+                file: new Audio("./assets/sounds/farts/fart4.mp3"),
+                isFarting: false,
+              },
+              {
+                id: "fart5",
+                file: new Audio("./assets/sounds/farts/fart5.mp3"),
+                isFarting: false,
+              },
+              {
+                id: "fart6",
+                file: new Audio("./assets/sounds/farts/fart6.mp3"),
+                isFarting: false,
+              },
+              {
+                id: "fart7",
+                file: new Audio("./assets/sounds/farts/fart7.mp3"),
+                isFarting: false,
+              },
+              {
+                id: "fart8",
+                file: new Audio("./assets/sounds/farts/fart8.mp3"),
+                isFarting: false,
+              },
+              {
+                id: "fart9",
+                file: new Audio("./assets/sounds/farts/fart9.mp3"),
+                isFarting: false,
               },
             ],
           };
@@ -367,6 +398,7 @@
       .christina:hover {
         transform: scale(3);
       }
+      .ronaldo {}
       .lucas,
       .player {
         cursor: pointer;
