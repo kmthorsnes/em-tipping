@@ -21,7 +21,8 @@ let names = [
   'Louise',
   'Stian',
   'Tormod',
-  'Lars'
+  'Lars',
+  'Jonatan'
 ];
 
 const translation = {
