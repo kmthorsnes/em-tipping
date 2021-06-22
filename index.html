@@ -75,9 +75,9 @@
             </div>
           </div>
           <div class="flex sm:flex-wrap mb-5 flex-col md:flex-row">
-            <div class="md:flex-auto flex justify-center items-center">
-              <div class="md:mx-8">
-                <table class="mx-10">
+            <div class="sm:justify-center md:flex-1 flex">
+              <div class="sm:mx-24 sm:flex-col lg:mx-8 ">
+                <table class="sm:ml-8 lg:ml-2 lg:ml-2">
                   <th colspan="2">
                     <h2
                       class="pb-2 text-base text-left font-mono mt-5 font-bold"
@@ -106,7 +106,7 @@
                   >
                     <td>{{result.ranking}}.</td>
                     <td>{{result.name}}</td>
-                    <td class="text-center pl-3">
+                    <td class="text-center pl-3 md:pl-1">
                       {{result.score}} ({{result.lastScore}})
                     </td>
                     <td class="text-xs px-1">
@@ -131,14 +131,14 @@
                 </div>
               </div>
             </div>
-            <div class="flex-col flex justify-center items-center">
-              <div class="ml-11">
+            <div class="md:flex-1 flex-col flex">
+              <div class="">
                 <h2
-                  class="pb-2 text-xl font-mono mt-5 font-bold md:text-center"
+                  class="pb-2 text-xl font-mono mt-5 font-bold text-center"
                 >
                   Siste resultat:
                 </h2>
-                <p class="font-mono md:text-center">
+                <p class="font-mono text-center">
                   {{nextMatchStats.lastMatch}}
                   ({{nextMatchStats.lastMatchResult}})
                 </p>
@@ -179,7 +179,7 @@
             </div>
             <div
               v-if="nextMatchStats.nextMatch"
-              class="md:flex-auto flex justify-center items-center"
+              class="md:flex-1 flex justify-center"
             >
               <div class="ml-8">
                 <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
