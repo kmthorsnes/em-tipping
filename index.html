@@ -18,11 +18,11 @@
   </head>
   <body>
     <div id="app">
-      <div class="bg-black h-auto pt-3 pb-3 h-full h-screen">
+      <div class="bg-black h-auto pt-3 pb-3 h-full">
         <div
           class="
             wrapper
-            m-5
+            my-auto
             p-5
             container
             mx-auto
@@ -74,9 +74,9 @@
               </ul>
             </div>
           </div>
-          <div class="flex sm:flex-wrap mb-5 flex-col md:flex-row">
-            <div class="sm:justify-center md:flex-1 flex">
-              <div class="sm:mx-24 sm:flex-col lg:mx-8 ">
+          <div class="flex mb-5 flex-col sm:flex-wrap lg:flex-row">
+            <div class="flex items-center md:flex-1">
+              <div class="flex sm:mx-24 sm:flex-col md:mx-40 lg:mx-0">
                 <table class="sm:ml-8 lg:ml-2 lg:ml-2">
                   <th colspan="2">
                     <h2
@@ -131,11 +131,9 @@
                 </div>
               </div>
             </div>
-            <div class="md:flex-1 flex-col flex">
+            <div class="md:flex-1 flex-col flex items-center">
               <div class="">
-                <h2
-                  class="pb-2 text-xl font-mono mt-5 font-bold text-center"
-                >
+                <h2 class="pb-2 text-xl font-mono mt-5 font-bold text-center">
                   Siste resultat:
                 </h2>
                 <p class="font-mono text-center">
@@ -179,7 +177,7 @@
             </div>
             <div
               v-if="nextMatchStats.nextMatch"
-              class="md:flex-1 flex justify-center"
+              class="md:flex-1 flex-col flex items-center"
             >
               <div class="ml-8">
                 <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
@@ -221,8 +219,8 @@
               </div>
             </div>
           </div>
-          <div class="flex items-centergs">
-            <div class="justify-start flex-1 items-center">
+          <div class="flex">
+            <div class="justify-start flex-1 items-end">
               <img
                 src="/assets/img/logo.png"
                 class="max-h-10 md:max-h-20 text-center"
@@ -230,21 +228,22 @@
                 loading="lazy"
               />
             </div>
-            <p
-              class="
-                md:ml-8
-                text-center
-                font-mono font-extralight
-                text-xs
-                md:text-sm
-                justify-center
-                flex-1
-                items-center
-              "
-            >
-              Sist oppdatert: {{ lastUpdate }}
-            </p>
-            <div class="justify-end flex-1 flex items-center">
+            <div class="flex items-end">
+              <p
+                class="
+                  text-center
+                  font-mono font-extralight
+                  text-xs
+                  md:text-sm
+                  justify-center
+                  flex-1
+                "
+              >
+                Sist oppdatert: {{ lastUpdate }}
+              </p>
+            </div>
+
+            <div class="justify-end flex-1 flex items-end">
               <img
                 src="/assets/img/omegalogo2.png"
                 alt=""
@@ -258,32 +257,32 @@
     </div>
     <script>
       var app = new Vue({
-        el: '#app',
+        el: "#app",
         data() {
           return {
             results: [],
             nextMatchStats: {},
-            lastUpdate: '',
+            lastUpdate: "",
             audios: [
               {
-                id: 'music',
-                file: new Audio('./assets/sounds/music/music.mp3'),
-                isPlaying: false
-              }
-            ]
+                id: "music",
+                file: new Audio("./assets/sounds/music/music.mp3"),
+                isPlaying: false,
+              },
+            ],
           };
         },
         methods: {
           frenchGreeting: function () {
-            const audio = new Audio('./assets/sounds/putain.mp3');
+            const audio = new Audio("./assets/sounds/putain.mp3");
             audio.play();
           },
           pokemonGreeting: function () {
-            document.getElementById('pokemonSound').muted = false;
-            document.getElementById('pokemonSound').play();
+            document.getElementById("pokemonSound").muted = false;
+            document.getElementById("pokemonSound").play();
           },
           lucasGreeting: function () {
-            const lucasHello = new Audio('./assets/sounds/bark3.mp3');
+            const lucasHello = new Audio("./assets/sounds/bark3.mp3");
             lucasHello.play();
           },
           play(audio) {
@@ -295,15 +294,15 @@
             audio.file.pause();
           },
           farter: function () {
-            const fart = new Audio('./assets/sounds/fart.mp3');
+            const fart = new Audio("./assets/sounds/fart.mp3");
             fart.play();
-          }
+          },
         },
         mounted() {
-          fetch('/data/scores.json')
+          fetch("/data/scores.json")
             .then((response) => {
               if (!response.ok)
-                throw new Error('HTTP error ' + response.status);
+                throw new Error("HTTP error " + response.status);
               return response.json();
             })
             .then((data) => {
@@ -313,15 +312,15 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ('0' + hoursUnformated).slice(-2);
+              const hours = ("0" + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ('0' + minutesUnformated).slice(-2);
+              const minutes = ("0" + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
-                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+                day + "/" + month + "/" + year + " " + hours + ":" + minutes;
             });
-        }
+        },
       });
     </script>
 
