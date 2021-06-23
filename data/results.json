@@ -32,8 +32,8 @@
     { "match": "Finland - Belgia", "result": "0 - 2", "hub": "B" },
     { "match": "Kroatia - Skottland", "result": "3 - 1", "hub": "H" },
     { "match": "Tsjekkia - England", "result": "0 - 1", "hub": "B" },
-    { "match": "Sverige - Polen", "result": "", "hub": "" },
-    { "match": "Slovakia - Spania", "result": "", "hub": "" },
+    { "match": "Sverige - Polen", "result": "3 - 2", "hub": "H" },
+    { "match": "Slovakia - Spania", "result": "0 - 5", "hub": "B" },
     { "match": "Portugal - Frankrike", "result": "", "hub": "" },
     { "match": "Tyskland - Ungarn", "result": "", "hub": "" }
   ],
@@ -42,7 +42,7 @@
     "B": ["Belgia", "Danmark", "Finland", "Russland"],
     "C": ["Nederland", "Østerrike", "Ukraina", "Nord-Makedonia"],
     "D": ["England", "Kroatia", "Tsjekkia", "Skottland"],
-    "E": ["", "", "", ""],
+    "E": ["Sverige", "Spania", "Slovakia", "Polen"],
     "F": ["", "", "", ""]
   },
   "quarterfinal": ["", "", "", "", "", "", "", ""],
