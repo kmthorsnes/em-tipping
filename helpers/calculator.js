@@ -21,7 +21,7 @@ for (let name of names) {
   calcfinal(name);
   calcChampion(name);
   calcTopScorers(name);
-  calcLastScore(name);
+  // calcLastScore(name);
 }
 
 console.log(scores);
@@ -31,7 +31,7 @@ for (let name of Object.keys(scores)) {
   const result = {
     name,
     score: scores[name].totalScore,
-    lastScore: scores[name].lastScore,
+    // lastScore: scores[name].lastScore,
     groupStage: scores[name].groupStage,
     gsStandings: scores[name].gsStandings,
     quarter: scores[name].quarter,
@@ -60,14 +60,14 @@ scoresArray.forEach((s, idx) => {
 });
 
 // get next match stats
-console.log('Getting next match stats...');
-const nextMatchStats = getNextMatchStats();
+// console.log('Getting next match stats...');
+// const nextMatchStats = getNextMatchStats();
 
 // write file in json format
 console.log('Writing to file scores.json ...');
 const jsonData = JSON.stringify({
   scores: scoresArray,
-  nextMatchStats,
+  // nextMatchStats,
   lastUpdate: new Date()
 });
 fs.writeFileSync('./data/scores.json', jsonData);
@@ -174,55 +174,55 @@ function calcTopScorers(name) {
   }
 }
 
-function calcLastScore(name) {
-  const gsm = predictions[name].groupStageMatches;
-  const gsmResults = results.groupStageMatches;
-  // get last match
-  const lastMatchIdx = gsmResults.findIndex((x) => !x.result) - 1;
-  const lastMatch = gsmResults[lastMatchIdx];
-  if (gsm[lastMatchIdx].result === lastMatch.result) {
-    scores[name].lastScore = 3;
-  } else if (gsm[lastMatchIdx].hub === lastMatch.hub) {
-    scores[name].lastScore = 1;
-  } else {
-    scores[name].lastScore = 0;
-  }
-}
+// function calcLastScore(name) {
+//   const gsm = predictions[name].groupStageMatches;
+//   const gsmResults = results.groupStageMatches;
+//   // get last match
+//   const lastMatchIdx = gsmResults.findIndex((x) => !x.result) - 1;
+//   const lastMatch = gsmResults[lastMatchIdx];
+//   if (gsm[lastMatchIdx].result === lastMatch.result) {
+//     scores[name].lastScore = 3;
+//   } else if (gsm[lastMatchIdx].hub === lastMatch.hub) {
+//     scores[name].lastScore = 1;
+//   } else {
+//     scores[name].lastScore = 0;
+//   }
+// }
 
-function getNextMatchStats() {
-  const statsObj = {};
-  const stats = [];
-  const gsmResults = results.groupStageMatches;
-  // next match with empty result
-  const nextMatchIdx = gsmResults.findIndex((x) => !x.result);
-  const nextMatch = gsmResults[nextMatchIdx].match;
-  const lastMatch = gsmResults[nextMatchIdx - 1].match;
-  const lastMatchResult = gsmResults[nextMatchIdx - 1].result;
+// function getNextMatchStats() {
+//   const statsObj = {};
+//   const stats = [];
+//   const gsmResults = results.groupStageMatches;
+//   // next match with empty result
+//   const nextMatchIdx = gsmResults.findIndex((x) => !x.result);
+//   const nextMatch = gsmResults[nextMatchIdx].match;
+//   const lastMatch = gsmResults[nextMatchIdx - 1].match;
+//   const lastMatchResult = gsmResults[nextMatchIdx - 1].result;
 
-  // get predictions for next match
-  for (let name of names) {
-    const prediction = predictions[name].groupStageMatches.find(
-      (x) => x.match === nextMatch
-    ).result;
-    if (statsObj[prediction]) statsObj[prediction]++;
-    else statsObj[prediction] = 1;
-  }
+//   // get predictions for next match
+//   for (let name of names) {
+//     const prediction = predictions[name].groupStageMatches.find(
+//       (x) => x.match === nextMatch
+//     ).result;
+//     if (statsObj[prediction]) statsObj[prediction]++;
+//     else statsObj[prediction] = 1;
+//   }
 
-  // turn object to array of objects and sort
-  for (let stat of Object.keys(statsObj)) {
-    const result = { stat, freq: statsObj[stat] };
-    stats.push(result);
-  }
-  stats.sort((a, b) => {
-    if (a.freq < b.freq) return 1;
-    else if (a.freq > b.freq) return -1;
-    else return 0;
-  });
+//   // turn object to array of objects and sort
+//   for (let stat of Object.keys(statsObj)) {
+//     const result = { stat, freq: statsObj[stat] };
+//     stats.push(result);
+//   }
+//   stats.sort((a, b) => {
+//     if (a.freq < b.freq) return 1;
+//     else if (a.freq > b.freq) return -1;
+//     else return 0;
+//   });
 
-  return {
-    nextMatch,
-    stats,
-    lastMatch,
-    lastMatchResult
-  };
-}
+//   return {
+//     nextMatch,
+//     stats,
+//     lastMatch,
+//     lastMatchResult
+//   };
+// }
