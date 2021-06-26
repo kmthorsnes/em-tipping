@@ -63,12 +63,13 @@ scoresArray.forEach((s, idx) => {
 // get next match stats
 // console.log('Getting next match stats...');
 // const nextMatchStats = getNextMatchStats();
+const nextMatchStats = getNextQuarterMatchStats();
 
 // write file in json format
 console.log('Writing to file scores.json ...');
 const jsonData = JSON.stringify({
   scores: scoresArray,
-  // nextMatchStats,
+  nextMatchStats,
   lastUpdate: new Date()
 });
 fs.writeFileSync('./data/scores.json', jsonData);
@@ -239,5 +240,29 @@ function getNextMatchStats() {
     stats,
     lastMatch,
     lastMatchResult
+  };
+}
+
+function getNextQuarterMatchStats() {
+  const { quarterfinal, quarterfinalMatches } = results;
+  let nextMatchIdx = quarterfinal.findIndex((x) => !x);
+  if (nextMatchIdx === -1) nextMatchIdx = quarterfinal.length - 1;
+  const nextMatch = quarterfinalMatches[nextMatchIdx];
+  nextMatch.hWin = 0;
+  nextMatch.bWin = 0;
+  const lastMatch = quarterfinalMatches[nextMatchIdx - 1];
+  const lastMatchWinner = quarterfinal[nextMatchIdx - 1];
+
+  // get predictions for next match
+  for (let name of names) {
+    const qPredictions = predictions[name].quarterfinal;
+    if (qPredictions.includes(nextMatch.h)) nextMatch.hWin++;
+    if (qPredictions.includes(nextMatch.b)) nextMatch.bWin++;
+  }
+
+  return {
+    nextMatch,
+    lastMatch,
+    lastMatchWinner
   };
 }
