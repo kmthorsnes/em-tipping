@@ -22,6 +22,7 @@ for (let name of names) {
   calcChampion(name);
   calcTopScorers(name);
   // calcLastScore(name);
+  calcLastScoreQuarter(name);
 }
 
 console.log(scores);
@@ -31,7 +32,7 @@ for (let name of Object.keys(scores)) {
   const result = {
     name,
     score: scores[name].totalScore,
-    // lastScore: scores[name].lastScore,
+    lastScore: scores[name].lastScore,
     groupStage: scores[name].groupStage,
     gsStandings: scores[name].gsStandings,
     quarter: scores[name].quarter,
@@ -174,55 +175,69 @@ function calcTopScorers(name) {
   }
 }
 
-// function calcLastScore(name) {
-//   const gsm = predictions[name].groupStageMatches;
-//   const gsmResults = results.groupStageMatches;
-//   // get last match
-//   const lastMatchIdx = gsmResults.findIndex((x) => !x.result) - 1;
-//   const lastMatch = gsmResults[lastMatchIdx];
-//   if (gsm[lastMatchIdx].result === lastMatch.result) {
-//     scores[name].lastScore = 3;
-//   } else if (gsm[lastMatchIdx].hub === lastMatch.hub) {
-//     scores[name].lastScore = 1;
-//   } else {
-//     scores[name].lastScore = 0;
-//   }
-// }
+function calcLastScore(name) {
+  const gsm = predictions[name].groupStageMatches;
+  const gsmResults = results.groupStageMatches;
+  // get last match
+  const lastMatchIdx = gsmResults.findIndex((x) => !x.result) - 1;
+  const lastMatch = gsmResults[lastMatchIdx];
+  if (gsm[lastMatchIdx].result === lastMatch.result) {
+    scores[name].lastScore = 3;
+  } else if (gsm[lastMatchIdx].hub === lastMatch.hub) {
+    scores[name].lastScore = 1;
+  } else {
+    scores[name].lastScore = 0;
+  }
+}
 
-// function getNextMatchStats() {
-//   const statsObj = {};
-//   const stats = [];
-//   const gsmResults = results.groupStageMatches;
-//   // next match with empty result
-//   const nextMatchIdx = gsmResults.findIndex((x) => !x.result);
-//   const nextMatch = gsmResults[nextMatchIdx].match;
-//   const lastMatch = gsmResults[nextMatchIdx - 1].match;
-//   const lastMatchResult = gsmResults[nextMatchIdx - 1].result;
+function calcLastScoreQuarter(name) {
+  scores[name].lastScore = 0;
+  const { quarterfinal } = results;
+  const currentMatchIdx = quarterfinal.findIndex((x) => !x);
+  let lastMatchIdx;
+  if (currentMatchIdx === 0) return;
 
-//   // get predictions for next match
-//   for (let name of names) {
-//     const prediction = predictions[name].groupStageMatches.find(
-//       (x) => x.match === nextMatch
-//     ).result;
-//     if (statsObj[prediction]) statsObj[prediction]++;
-//     else statsObj[prediction] = 1;
-//   }
+  lastMatchIdx =
+    currentMatchIdx === -1 ? quarterfinal.length - 1 : currentMatchIdx - 1;
+  const lastMatchWinner = quarterfinal[lastMatchIdx];
+  const predictedWinners = predictions[name].quarterfinal;
+  if (predictedWinners.includes(lastMatchWinner)) scores[name].lastScore = 6;
+}
 
-//   // turn object to array of objects and sort
-//   for (let stat of Object.keys(statsObj)) {
-//     const result = { stat, freq: statsObj[stat] };
-//     stats.push(result);
-//   }
-//   stats.sort((a, b) => {
-//     if (a.freq < b.freq) return 1;
-//     else if (a.freq > b.freq) return -1;
-//     else return 0;
-//   });
+function getNextMatchStats() {
+  const statsObj = {};
+  const stats = [];
+  const gsmResults = results.groupStageMatches;
+  // next match with empty result
+  const nextMatchIdx = gsmResults.findIndex((x) => !x.result);
+  const nextMatch = gsmResults[nextMatchIdx].match;
+  const lastMatch = gsmResults[nextMatchIdx - 1].match;
+  const lastMatchResult = gsmResults[nextMatchIdx - 1].result;
 
-//   return {
-//     nextMatch,
-//     stats,
-//     lastMatch,
-//     lastMatchResult
-//   };
-// }
+  // get predictions for next match
+  for (let name of names) {
+    const prediction = predictions[name].groupStageMatches.find(
+      (x) => x.match === nextMatch
+    ).result;
+    if (statsObj[prediction]) statsObj[prediction]++;
+    else statsObj[prediction] = 1;
+  }
+
+  // turn object to array of objects and sort
+  for (let stat of Object.keys(statsObj)) {
+    const result = { stat, freq: statsObj[stat] };
+    stats.push(result);
+  }
+  stats.sort((a, b) => {
+    if (a.freq < b.freq) return 1;
+    else if (a.freq > b.freq) return -1;
+    else return 0;
+  });
+
+  return {
+    nextMatch,
+    stats,
+    lastMatch,
+    lastMatchResult
+  };
+}

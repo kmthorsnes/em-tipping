@@ -45,7 +45,17 @@
     "E": ["Sverige", "Spania", "Slovakia", "Polen"],
     "F": ["Frankrike", "Tyskland", "Portugal", "Ungarn"]
   },
-  "quarterfinal": ["", "", "", "", "", "", "", ""],
+  "quarterfinalMatches": [
+    { "h": "Wales", "b": "Danmark" },
+    { "h": "Italia", "b": "Østerrike" },
+    { "h": "Nederland", "b": "Tsjekkia" },
+    { "h": "Belgia", "b": "Portugal" },
+    { "h": "Kroatia", "b": "Spania" },
+    { "h": "Frankrike", "b": "Sveits" },
+    { "h": "England", "b": "Tyskland" },
+    { "h": "Sverige", "b": "Ukraina" }
+  ],
+  "quarterfinal": ["Danmark", "", "", "", "", "", "", ""],
   "semifinal": ["", "", "", ""],
   "final": ["", ""],
   "champion": "",
