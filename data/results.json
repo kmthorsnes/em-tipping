@@ -55,7 +55,7 @@
     { "h": "England", "b": "Tyskland" },
     { "h": "Sverige", "b": "Ukraina" }
   ],
-  "quarterfinal": ["Danmark", "Italia", "Tsjekkia", "", "", "", "", ""],
+  "quarterfinal": ["Danmark", "Italia", "Tsjekkia", "Belgia", "", "", "", ""],
   "semifinal": ["", "", "", ""],
   "final": ["", ""],
   "champion": "",
