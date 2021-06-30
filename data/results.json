@@ -63,7 +63,13 @@
     "Spania",
     "Sveits",
     "England",
-    ""
+    "Ukraina"
+  ],
+  "semifinalMatches": [
+    { "h": "Sveits", "b": "Spania" },
+    { "h": "Belgia", "b": "Italia" },
+    { "h": "Tsjekkia", "b": "Danmark" },
+    { "h": "Ukriana", "b": "England" }
   ],
   "semifinal": ["", "", "", ""],
   "final": ["", ""],
