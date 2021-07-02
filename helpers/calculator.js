@@ -303,7 +303,7 @@ function getNextSemiMatchStats() {
     ({ lastMatch, lastMatchWinner } = getNextQuarterMatchStats());
   } else {
     lastMatch = semifinalMatches[nextMatchIdx - 1];
-    lastMatchWinner = semifinalMatches[nextMatchIdx - 1];
+    lastMatchWinner = semifinal[nextMatchIdx - 1];
   }
 
   return {
