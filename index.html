@@ -18,7 +18,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="bg-black h-auto pt-3 pb-3 h-full">
+      <div class="bg-black h-auto pt-3 pb-3 h-screen">
         <div
           class="
             wrapper
@@ -137,8 +137,11 @@
                   Siste resultat:
                 </h2>
                 <p class="font-mono text-center">
-                  {{nextMatchStats.lastMatch}}
-                  ({{nextMatchStats.lastMatchResult}})
+                  {{nextMatchStats.lastMatch.h}} -
+                  {{nextMatchStats.lastMatch.b}}
+                  <strong style="color: rgb(52, 211, 153)">
+                    ({{nextMatchStats.lastMatchWinner}})
+                  </strong>
                 </p>
               </div>
               <div class="flex flex-col items-center">
@@ -183,12 +186,15 @@
                 <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
                   Neste kamp:
                 </h2>
-                <p class="font-mono">{{nextMatchStats.nextMatch}}</p>
+                <p class="font-mono">
+                  {{nextMatchStats.nextMatch.h}} -
+                  {{nextMatchStats.nextMatch.b}}
+                </p>
                 <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
                   Tippestatistikk:
                 </h2>
-                <table class="">
-                  <th colspan="1">
+                <table class="table-fixed">
+                  <th colspan="1" class="w-1/2">
                     <h2
                       class="
                         pb-2
@@ -197,23 +203,38 @@
                         mt-5
                         mr-5
                         font-bold
+                        w-1/2
+                        text-blue-400
                       "
                     >
-                      Resultat
+                      Hvem kvalifiserer til neste runde?
                     </h2>
                   </th>
                   <th>
-                    <h2 class="pb-2 text-md text-left font-mono mt-5 font-bold">
+                    <h2
+                      class="
+                        pb-2
+                        text-md text-left
+                        font-mono
+                        mt-5
+                        font-bold
+                        text-blue-400
+                      "
+                    >
                       Antall spillere
                     </h2>
                   </th>
-                  <tr
-                    v-for="(s, idx) in nextMatchStats.stats"
-                    :key="idx"
-                    class="font-mono"
-                  >
-                    <td>{{s.stat}}</td>
-                    <td class="text-center">{{s.freq}} spiller(e)</td>
+                  <tr class="font-mono">
+                    <td>{{nextMatchStats.nextMatch.h}}</td>
+                    <td class="text-center">
+                      {{nextMatchStats.nextMatch.hWin}} spiller(e)
+                    </td>
+                  </tr>
+                  <tr class="font-mono">
+                    <td>{{nextMatchStats.nextMatch.b}}</td>
+                    <td class="text-center">
+                      {{nextMatchStats.nextMatch.bWin}} spiller(e)
+                    </td>
                   </tr>
                 </table>
               </div>
@@ -257,32 +278,32 @@
     </div>
     <script>
       var app = new Vue({
-        el: "#app",
+        el: '#app',
         data() {
           return {
             results: [],
             nextMatchStats: {},
-            lastUpdate: "",
+            lastUpdate: '',
             audios: [
               {
-                id: "music",
-                file: new Audio("./assets/sounds/music/music.mp3"),
-                isPlaying: false,
-              },
-            ],
+                id: 'music',
+                file: new Audio('./assets/sounds/music/music.mp3'),
+                isPlaying: false
+              }
+            ]
           };
         },
         methods: {
           frenchGreeting: function () {
-            const audio = new Audio("./assets/sounds/putain.mp3");
+            const audio = new Audio('./assets/sounds/putain.mp3');
             audio.play();
           },
           pokemonGreeting: function () {
-            document.getElementById("pokemonSound").muted = false;
-            document.getElementById("pokemonSound").play();
+            document.getElementById('pokemonSound').muted = false;
+            document.getElementById('pokemonSound').play();
           },
           lucasGreeting: function () {
-            const lucasHello = new Audio("./assets/sounds/bark3.mp3");
+            const lucasHello = new Audio('./assets/sounds/bark3.mp3');
             lucasHello.play();
           },
           play(audio) {
@@ -294,15 +315,15 @@
             audio.file.pause();
           },
           farter: function () {
-            const fart = new Audio("./assets/sounds/fart.mp3");
+            const fart = new Audio('./assets/sounds/fart.mp3');
             fart.play();
-          },
+          }
         },
         mounted() {
-          fetch("/data/scores.json")
+          fetch('/data/scores.json')
             .then((response) => {
               if (!response.ok)
-                throw new Error("HTTP error " + response.status);
+                throw new Error('HTTP error ' + response.status);
               return response.json();
             })
             .then((data) => {
@@ -312,15 +333,15 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ("0" + hoursUnformated).slice(-2);
+              const hours = ('0' + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ("0" + minutesUnformated).slice(-2);
+              const minutes = ('0' + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
-                day + "/" + month + "/" + year + " " + hours + ":" + minutes;
+                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
             });
-        },
+        }
       });
     </script>
 

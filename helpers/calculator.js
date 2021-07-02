@@ -21,7 +21,7 @@ for (let name of names) {
   calcfinal(name);
   calcChampion(name);
   calcTopScorers(name);
-  calcLastScore(name);
+  calcLastScoreSemi(name);
 }
 
 console.log(scores);
@@ -60,8 +60,9 @@ scoresArray.forEach((s, idx) => {
 });
 
 // get next match stats
-console.log('Getting next match stats...');
-const nextMatchStats = getNextMatchStats();
+// console.log('Getting next match stats...');
+// const nextMatchStats = getNextMatchStats();
+const nextMatchStats = getNextSemiMatchStats();
 
 // write file in json format
 console.log('Writing to file scores.json ...');
@@ -189,6 +190,37 @@ function calcLastScore(name) {
   }
 }
 
+function calcLastScoreQuarter(name) {
+  scores[name].lastScore = 0;
+  const { quarterfinal } = results;
+  const currentMatchIdx = quarterfinal.findIndex((x) => !x);
+  let lastMatchIdx;
+  if (currentMatchIdx === 0) return;
+
+  lastMatchIdx =
+    currentMatchIdx === -1 ? quarterfinal.length - 1 : currentMatchIdx - 1;
+  const lastMatchWinner = quarterfinal[lastMatchIdx];
+  const predictedWinners = predictions[name].quarterfinal;
+  if (predictedWinners.includes(lastMatchWinner)) scores[name].lastScore = 6;
+}
+
+function calcLastScoreSemi(name) {
+  scores[name].lastScore = 0;
+  const { semifinal } = results;
+  const currentMatchIdx = semifinal.findIndex((x) => !x);
+  let lastMatchIdx;
+  if (currentMatchIdx === 0) {
+    calcLastScoreQuarter(name);
+    return;
+  }
+
+  lastMatchIdx =
+    currentMatchIdx === -1 ? semifinal.length - 1 : currentMatchIdx - 1;
+  const lastMatchWinner = semifinal[lastMatchIdx];
+  const predictedWinners = predictions[name].semifinal;
+  if (predictedWinners.includes(lastMatchWinner)) scores[name].lastScore = 8;
+}
+
 function getNextMatchStats() {
   const statsObj = {};
   const stats = [];
@@ -224,5 +256,59 @@ function getNextMatchStats() {
     stats,
     lastMatch,
     lastMatchResult
+  };
+}
+
+function getNextQuarterMatchStats() {
+  const { quarterfinal, quarterfinalMatches } = results;
+  let nextMatchIdx = quarterfinal.findIndex((x) => !x);
+  if (nextMatchIdx === -1) nextMatchIdx = quarterfinal.length;
+  const nextMatch = quarterfinalMatches[nextMatchIdx] || {};
+  nextMatch.hWin = 0;
+  nextMatch.bWin = 0;
+  const lastMatch = quarterfinalMatches[nextMatchIdx - 1];
+  const lastMatchWinner = quarterfinal[nextMatchIdx - 1];
+
+  // get predictions for next match
+  for (let name of names) {
+    const qPredictions = predictions[name].quarterfinal;
+    if (qPredictions.includes(nextMatch.h)) nextMatch.hWin++;
+    if (qPredictions.includes(nextMatch.b)) nextMatch.bWin++;
+  }
+
+  return {
+    nextMatch,
+    lastMatch,
+    lastMatchWinner
+  };
+}
+
+function getNextSemiMatchStats() {
+  const { semifinal, semifinalMatches } = results;
+  let nextMatchIdx = semifinal.findIndex((x) => !x);
+  if (nextMatchIdx === -1) nextMatchIdx = semifinal.length - 1;
+  const nextMatch = semifinalMatches[nextMatchIdx];
+  nextMatch.hWin = 0;
+  nextMatch.bWin = 0;
+
+  // get predictions for next match
+  for (let name of names) {
+    const qPredictions = predictions[name].semifinal;
+    if (qPredictions.includes(nextMatch.h)) nextMatch.hWin++;
+    if (qPredictions.includes(nextMatch.b)) nextMatch.bWin++;
+  }
+
+  let lastMatch, lastMatchWinner;
+  if (nextMatchIdx === 0) {
+    ({ lastMatch, lastMatchWinner } = getNextQuarterMatchStats());
+  } else {
+    lastMatch = semifinalMatches[nextMatchIdx - 1];
+    lastMatchWinner = semifinalMatches[nextMatchIdx - 1];
+  }
+
+  return {
+    nextMatch,
+    lastMatch,
+    lastMatchWinner
   };
 }

@@ -34,8 +34,8 @@
     { "match": "Tsjekkia - England", "result": "0 - 1", "hub": "B" },
     { "match": "Sverige - Polen", "result": "3 - 2", "hub": "H" },
     { "match": "Slovakia - Spania", "result": "0 - 5", "hub": "B" },
-    { "match": "Portugal - Frankrike", "result": "", "hub": "" },
-    { "match": "Tyskland - Ungarn", "result": "", "hub": "" }
+    { "match": "Portugal - Frankrike", "result": "2 - 2", "hub": "U" },
+    { "match": "Tyskland - Ungarn", "result": "2 - 2", "hub": "U" }
   ],
   "groupStageResults": {
     "A": ["Italia", "Wales", "Sveits", "Tyrkia"],
@@ -43,9 +43,34 @@
     "C": ["Nederland", "Østerrike", "Ukraina", "Nord-Makedonia"],
     "D": ["England", "Kroatia", "Tsjekkia", "Skottland"],
     "E": ["Sverige", "Spania", "Slovakia", "Polen"],
-    "F": ["", "", "", ""]
+    "F": ["Frankrike", "Tyskland", "Portugal", "Ungarn"]
   },
-  "quarterfinal": ["", "", "", "", "", "", "", ""],
+  "quarterfinalMatches": [
+    { "h": "Wales", "b": "Danmark" },
+    { "h": "Italia", "b": "Østerrike" },
+    { "h": "Nederland", "b": "Tsjekkia" },
+    { "h": "Belgia", "b": "Portugal" },
+    { "h": "Kroatia", "b": "Spania" },
+    { "h": "Frankrike", "b": "Sveits" },
+    { "h": "England", "b": "Tyskland" },
+    { "h": "Sverige", "b": "Ukraina" }
+  ],
+  "quarterfinal": [
+    "Danmark",
+    "Italia",
+    "Tsjekkia",
+    "Belgia",
+    "Spania",
+    "Sveits",
+    "England",
+    "Ukraina"
+  ],
+  "semifinalMatches": [
+    { "h": "Sveits", "b": "Spania" },
+    { "h": "Belgia", "b": "Italia" },
+    { "h": "Tsjekkia", "b": "Danmark" },
+    { "h": "Ukriana", "b": "England" }
+  ],
   "semifinal": ["", "", "", ""],
   "final": ["", ""],
   "champion": "",
