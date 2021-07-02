@@ -146,22 +146,23 @@
               </div>
               <div class="flex flex-col items-center">
                 <img
-                  @mouseover="pokemonGreeting()"
-                  class="max-h-15 md:max-h-30 md:mt-5 christina mx-auto"
-                  src="/assets/img/christina.png"
+                  @mouseover="elinIsHungry()"
+                  class="max-h-15 md:max-h-30 md:mt-5 elin mx-auto"
+                  src="/assets/img/elin.png"
                   alt=""
                   loading="lazy"
                 />
+
                 <audio>
                   <audio
-                    id="pokemonSound"
-                    src="/assets/sounds/pokemon.mp3"
+                    id="elinSound"
+                    src="/assets/sounds/elin.mp3"
                     muted
                   ></audio>
                 </audio>
                 <div class="flex items-center">
                   <button
-                    @click="farter()"
+                    @click="shitter()"
                     id="fool"
                     class="
                       mx-auto
@@ -173,7 +174,7 @@
                       rounded-full
                     "
                   >
-                    Don't click me
+                    Don't do it
                   </button>
                 </div>
               </div>
@@ -278,32 +279,36 @@
     </div>
     <script>
       var app = new Vue({
-        el: '#app',
+        el: "#app",
         data() {
           return {
             results: [],
             nextMatchStats: {},
-            lastUpdate: '',
+            lastUpdate: "",
             audios: [
               {
-                id: 'music',
-                file: new Audio('./assets/sounds/music/music.mp3'),
-                isPlaying: false
-              }
-            ]
+                id: "music",
+                file: new Audio("./assets/sounds/music/music.mp3"),
+                isPlaying: false,
+              },
+            ],
           };
         },
         methods: {
+          elinIsHungry: function () {
+            document.getElementById("elinSound").muted = false;
+            document.getElementById("elinSound").play();
+          },
           frenchGreeting: function () {
-            const audio = new Audio('./assets/sounds/putain.mp3');
+            const audio = new Audio("./assets/sounds/putain.mp3");
             audio.play();
           },
           pokemonGreeting: function () {
-            document.getElementById('pokemonSound').muted = false;
-            document.getElementById('pokemonSound').play();
+            document.getElementById("pokemonSound").muted = false;
+            document.getElementById("pokemonSound").play();
           },
           lucasGreeting: function () {
-            const lucasHello = new Audio('./assets/sounds/bark3.mp3');
+            const lucasHello = new Audio("./assets/sounds/bark3.mp3");
             lucasHello.play();
           },
           play(audio) {
@@ -315,15 +320,19 @@
             audio.file.pause();
           },
           farter: function () {
-            const fart = new Audio('./assets/sounds/fart.mp3');
+            const fart = new Audio("./assets/sounds/fart.mp3");
             fart.play();
-          }
+          },
+          shitter: function () {
+            const shit = new Audio("./assets/sounds/realShit.mp3");
+            shit.play();
+          },
         },
         mounted() {
-          fetch('/data/scores.json')
+          fetch("/data/scores.json")
             .then((response) => {
               if (!response.ok)
-                throw new Error('HTTP error ' + response.status);
+                throw new Error("HTTP error " + response.status);
               return response.json();
             })
             .then((data) => {
@@ -333,19 +342,26 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ('0' + hoursUnformated).slice(-2);
+              const hours = ("0" + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ('0' + minutesUnformated).slice(-2);
+              const minutes = ("0" + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
-                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+                day + "/" + month + "/" + year + " " + hours + ":" + minutes;
             });
-        }
+        },
       });
     </script>
 
     <style>
+      .elin {
+        transition: 0.1s ease-in-out;
+        opacity: 0.5;
+      }
+      .elin:hover {
+        opacity: 1;
+      }
       .francois {
         transition: 0.7s ease-in-out;
       }
