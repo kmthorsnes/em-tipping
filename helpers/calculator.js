@@ -62,7 +62,7 @@ scoresArray.forEach((s, idx) => {
 // get next match stats
 // console.log('Getting next match stats...');
 // const nextMatchStats = getNextMatchStats();
-const nextMatchStats = getNextSemiMatchStats();
+const nextMatchStats = getNextFinalMatchStats();
 
 // write file in json format
 console.log('Writing to file scores.json ...');
@@ -286,8 +286,8 @@ function getNextQuarterMatchStats() {
 function getNextSemiMatchStats() {
   const { semifinal, semifinalMatches } = results;
   let nextMatchIdx = semifinal.findIndex((x) => !x);
-  if (nextMatchIdx === -1) nextMatchIdx = semifinal.length - 1;
-  const nextMatch = semifinalMatches[nextMatchIdx];
+  if (nextMatchIdx === -1) nextMatchIdx = semifinal.length;
+  const nextMatch = semifinalMatches[nextMatchIdx] || {};
   nextMatch.hWin = 0;
   nextMatch.bWin = 0;
 
@@ -304,6 +304,36 @@ function getNextSemiMatchStats() {
   } else {
     lastMatch = semifinalMatches[nextMatchIdx - 1];
     lastMatchWinner = semifinal[nextMatchIdx - 1];
+  }
+
+  return {
+    nextMatch,
+    lastMatch,
+    lastMatchWinner
+  };
+}
+
+function getNextFinalMatchStats() {
+  const { final, finalMatches } = results;
+  let nextMatchIdx = final.findIndex((x) => !x);
+  if (nextMatchIdx === -1) nextMatchIdx = final.length;
+  const nextMatch = finalMatches[nextMatchIdx] || {};
+  nextMatch.hWin = 0;
+  nextMatch.bWin = 0;
+
+  // get predictions for next match
+  for (let name of names) {
+    const qPredictions = predictions[name].final;
+    if (qPredictions.includes(nextMatch.h)) nextMatch.hWin++;
+    if (qPredictions.includes(nextMatch.b)) nextMatch.bWin++;
+  }
+
+  let lastMatch, lastMatchWinner;
+  if (nextMatchIdx === 0) {
+    ({ lastMatch, lastMatchWinner } = getNextSemiMatchStats());
+  } else {
+    lastMatch = finalMatches[nextMatchIdx - 1];
+    lastMatchWinner = final[nextMatchIdx - 1];
   }
 
   return {
