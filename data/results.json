@@ -76,7 +76,7 @@
     { "h": "Italia", "b": "Spania" },
     { "h": "England", "b": "Danmark" }
   ],
-  "final": ["", ""],
+  "final": ["Italia", ""],
   "championMatch": [{ "h": "Italia", "b": "Spania" }],
   "champion": "",
   "topScorers": ["", ""]
