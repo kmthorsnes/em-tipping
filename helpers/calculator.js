@@ -21,7 +21,7 @@ for (let name of names) {
   calcfinal(name);
   calcChampion(name);
   calcTopScorers(name);
-  calcLastScoreSemi(name);
+  calcLastScoreChampion(name);
 }
 
 console.log(scores);
@@ -148,7 +148,7 @@ function calcfinal(name) {
   for (let team of finalPredictions) {
     if (finalResults.includes(team)) {
       scores[name].totalScore += 12;
-      scores[name].semi += 12;
+      scores[name].final += 12;
     }
   }
 }
@@ -219,6 +219,37 @@ function calcLastScoreSemi(name) {
   const lastMatchWinner = semifinal[lastMatchIdx];
   const predictedWinners = predictions[name].semifinal;
   if (predictedWinners.includes(lastMatchWinner)) scores[name].lastScore = 8;
+}
+
+function calcLastScoreFinal(name) {
+  scores[name].lastScore = 0;
+  const { final } = results;
+  const currentMatchIdx = final.findIndex((x) => !x);
+  let lastMatchIdx;
+  if (currentMatchIdx === 0) {
+    calcLastScoreSemi(name);
+    return;
+  }
+
+  lastMatchIdx =
+    currentMatchIdx === -1 ? final.length - 1 : currentMatchIdx - 1;
+  const lastMatchWinner = final[lastMatchIdx];
+  const predictedWinners = predictions[name].final;
+  if (predictedWinners.includes(lastMatchWinner)) scores[name].lastScore = 12;
+}
+
+function calcLastScoreChampion(name) {
+  scores[name].lastScore = 0;
+  const { champion } = results;
+  const hasChampion = !!champion;
+  if (!hasChampion) {
+    calcLastScoreFinal(name);
+    return;
+  }
+
+  const lastMatchWinner = champion;
+  const predictedWinner = predictions[name].champion;
+  if (lastMatchWinner === predictedWinner) scores[name].lastScore = 15;
 }
 
 function getNextMatchStats() {
@@ -334,6 +365,28 @@ function getNextFinalMatchStats() {
   } else {
     lastMatch = finalMatches[nextMatchIdx - 1];
     lastMatchWinner = final[nextMatchIdx - 1];
+  }
+
+  return {
+    nextMatch,
+    lastMatch,
+    lastMatchWinner
+  };
+}
+
+function getNextChampionMatchStats() {
+  const { champion, championMatch } = results;
+  let hasChampion = !!champion;
+  const nextMatch = {};
+  nextMatch.hWin = 0;
+  nextMatch.bWin = 0;
+
+  let lastMatch, lastMatchWinner;
+  if (!hasChampion) {
+    ({ lastMatch, lastMatchWinner } = getNextSemiMatchStats());
+  } else {
+    lastMatch = championMatch[0];
+    lastMatchWinner = champion;
   }
 
   return {
