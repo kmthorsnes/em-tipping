@@ -62,7 +62,7 @@ scoresArray.forEach((s, idx) => {
 // get next match stats
 // console.log('Getting next match stats...');
 // const nextMatchStats = getNextMatchStats();
-const nextMatchStats = getNextFinalMatchStats();
+const nextMatchStats = getNextChampionMatchStats();
 
 // write file in json format
 console.log('Writing to file scores.json ...');
@@ -375,15 +375,24 @@ function getNextFinalMatchStats() {
 }
 
 function getNextChampionMatchStats() {
+  console.log('hi hi hi');
   const { champion, championMatch } = results;
   let hasChampion = !!champion;
-  const nextMatch = {};
+  let nextMatch = !hasChampion ? championMatch[0] : {};
   nextMatch.hWin = 0;
   nextMatch.bWin = 0;
 
   let lastMatch, lastMatchWinner;
   if (!hasChampion) {
-    ({ lastMatch, lastMatchWinner } = getNextSemiMatchStats());
+    ({ lastMatch, lastMatchWinner } = getNextFinalMatchStats());
+    // get predictions for next match
+    for (let name of names) {
+      const qPredictions = predictions[name].champion;
+      console.log(qPredictions);
+      console.log(nextMatch);
+      if (qPredictions === nextMatch.h) nextMatch.hWin++;
+      if (qPredictions === nextMatch.b) nextMatch.bWin++;
+    }
   } else {
     lastMatch = championMatch[0];
     lastMatchWinner = champion;
