@@ -239,6 +239,45 @@
                       {{nextMatchStats.nextMatch.bWin}} spiller(e)
                     </td>
                   </tr>
+                  <th colspan="1" class="">
+                    <h2
+                      class="
+                        pb-2
+                        text-md text-left
+                        font-mono
+                        mt-5
+                        mr-5
+                        font-bold
+                        w-1/2
+                        text-blue-400
+                      "
+                    >
+                      Hvem blir toppscorer?
+                    </h2>
+                  </th>
+                  <th>
+                    <h2
+                      class="
+                        pb-2
+                        text-md text-left
+                        font-mono
+                        mt-5
+                        font-bold
+                        text-blue-400
+                      "
+                    >
+                      Antall spillere
+                    </h2>
+                  </th>
+                  <tr
+                    v-for="(scorer, idx) in topScorerStats"
+                    :key="idx"
+                    class="font-mono"
+                  >
+                    hi
+                    <td>{{scorer[0]}}</td>
+                    <td class="text-center">{{scorer[1]}} spiller(e)</td>
+                  </tr>
                 </table>
               </div>
             </div>
@@ -286,6 +325,7 @@
           return {
             results: [],
             nextMatchStats: {},
+            topScorerStats: [],
             lastUpdate: '',
             audios: [
               {
@@ -338,7 +378,8 @@
               return response.json();
             })
             .then((data) => {
-              const { scores, nextMatchStats, lastUpdate } = data;
+              const { scores, nextMatchStats, topScorerStats, lastUpdate } =
+                data;
               const dateObject = new Date(lastUpdate);
               const day = dateObject.getDate();
               const month = dateObject.getMonth() + 1;
@@ -349,6 +390,7 @@
               const minutes = ('0' + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
+              this.topScorerStats = topScorerStats;
               this.lastUpdate =
                 day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
             });

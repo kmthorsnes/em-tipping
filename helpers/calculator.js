@@ -63,12 +63,14 @@ scoresArray.forEach((s, idx) => {
 // console.log('Getting next match stats...');
 // const nextMatchStats = getNextMatchStats();
 const nextMatchStats = getNextChampionMatchStats();
+const topScorerStats = getTopScorerStats();
 
 // write file in json format
 console.log('Writing to file scores.json ...');
 const jsonData = JSON.stringify({
   scores: scoresArray,
   nextMatchStats,
+  topScorerStats,
   lastUpdate: new Date()
 });
 fs.writeFileSync('./data/scores.json', jsonData);
@@ -375,7 +377,6 @@ function getNextFinalMatchStats() {
 }
 
 function getNextChampionMatchStats() {
-  console.log('hi hi hi');
   const { champion, championMatch } = results;
   let hasChampion = !!champion;
   let nextMatch = !hasChampion ? championMatch[0] : {};
@@ -388,8 +389,6 @@ function getNextChampionMatchStats() {
     // get predictions for next match
     for (let name of names) {
       const qPredictions = predictions[name].champion;
-      console.log(qPredictions);
-      console.log(nextMatch);
       if (qPredictions === nextMatch.h) nextMatch.hWin++;
       if (qPredictions === nextMatch.b) nextMatch.bWin++;
     }
@@ -403,4 +402,27 @@ function getNextChampionMatchStats() {
     lastMatch,
     lastMatchWinner
   };
+}
+
+function getTopScorerStats() {
+  const topScorers = {};
+  for (let name of names) {
+    const topScorerArr = predictions[name].topScorers;
+    for (let scorer of topScorerArr) {
+      if (topScorers[scorer] === undefined) {
+        topScorers[scorer] = 1;
+      } else {
+        topScorers[scorer]++;
+      }
+    }
+  }
+  const sortedScorers = [];
+  for (scorer in topScorers) {
+    sortedScorers.push([scorer, topScorers[scorer]]);
+  }
+  sortedScorers.sort((a, b) => {
+    return b[1] - a[1];
+  });
+  console.log('top scorers', sortedScorers);
+  return sortedScorers;
 }

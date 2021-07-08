@@ -121,7 +121,7 @@
     "semifinal": ["Tyrkia", "Frankrike", "Spania", "Italia"],
     "final": ["Frankrike", "Spania"],
     "champion": "Spania",
-    "topScorers": ["Mbappe", "Ronaldo"]
+    "topScorers": ["Kylian Mbappé", "Cristiano Ronaldo"]
   },
   "Caroline": {
     "groupStageMatches": [
@@ -307,7 +307,7 @@
     "semifinal": ["Tyskland", "Frankrike", "Østerrike", "Danmark"],
     "final": ["Tyskland", "Frankrike"],
     "champion": "Frankrike",
-    "topScorers": ["Robert Lewndowski", "Harry Kane"]
+    "topScorers": ["Robert Lewandowski", "Harry Kane"]
   },
   "Francois": {
     "groupStageMatches": [
@@ -369,7 +369,7 @@
     "semifinal": ["Frankrike", "Belgia", "Portugal", "Tyskland"],
     "final": ["Frankrike", "Tyskland"],
     "champion": "Frankrike",
-    "topScorers": ["Mbappé", "Ronaldo"]
+    "topScorers": ["Kylian Mbappé", "Cristiano Ronaldo"]
   },
   "Joakim": {
     "groupStageMatches": [
@@ -493,7 +493,7 @@
     "semifinal": ["Frankrike", "Tyskland", "Belgia", "Spania"],
     "final": ["Frankrike", "Belgia"],
     "champion": "Frankrike",
-    "topScorers": ["Lukaku", "Mbappe"]
+    "topScorers": ["Romelu Lukaku", "Kylian Mbappé"]
   },
   "Karoline": {
     "groupStageMatches": [
@@ -617,7 +617,7 @@
     "semifinal": ["Frankrike", "Tyskland", "Belgia", "Italia"],
     "final": ["Frankrike ", "Belgia"],
     "champion": "Frankrike",
-    "topScorers": ["Kylian Mbappe", "Romelu Lukaku"]
+    "topScorers": ["Kylian Mbappé", "Romelu Lukaku"]
   },
   "Louise": {
     "groupStageMatches": [
@@ -741,7 +741,7 @@
     "semifinal": ["Italia", "Frankrike", "Tyskland", "Nederland"],
     "final": ["Italia", "Frankrike"],
     "champion": "Frankrike",
-    "topScorers": ["Harry Kane", "Kylian Mbappe"]
+    "topScorers": ["Harry Kane", "Kylian Mbappé"]
   },
   "Tormod": {
     "groupStageMatches": [
@@ -865,7 +865,7 @@
     "semifinal": ["Frankrike", "England", "Spania", "Italia"],
     "final": ["Italia", "England"],
     "champion": "Italia",
-    "topScorers": ["Ronaldo", "Levandowkski"]
+    "topScorers": ["Cristiano Ronaldo", "Robert Lewandowski"]
   },
   "Jonatan": {
     "groupStageMatches": [
@@ -927,6 +927,6 @@
     "semifinal": ["Belgia", "Frankrike", "Tyskland", "Portugal"],
     "final": ["Tyskland", "Frankrike"],
     "champion": "Frankrike",
-    "topScorers": ["Lukaku", "Ronaldo"]
+    "topScorers": ["Romelu Lukaku", "Cristiano Ronaldo"]
   }
 }
