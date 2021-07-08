@@ -155,7 +155,9 @@
                 />
 
                 <audio>
-                  <audio muted autoplay
+                  <audio
+                    muted
+                    autoplay
                     id="elinSound"
                     src="/assets/sounds/elin.mp3"
                   ></audio>
@@ -195,7 +197,7 @@
                   Tippestatistikk:
                 </h2>
                 <table class="table-fixed">
-                  <th colspan="1" class="w-1/2">
+                  <th colspan="1" class="">
                     <h2
                       class="
                         pb-2
@@ -208,7 +210,7 @@
                         text-blue-400
                       "
                     >
-                      Hvem kvalifiserer til neste runde?
+                      Hvem vinner EURO 2020?
                     </h2>
                   </th>
                   <th>
@@ -279,36 +281,36 @@
     </div>
     <script>
       var app = new Vue({
-        el: "#app",
+        el: '#app',
         data() {
           return {
             results: [],
             nextMatchStats: {},
-            lastUpdate: "",
+            lastUpdate: '',
             audios: [
               {
-                id: "music",
-                file: new Audio("./assets/sounds/music/music.mp3"),
-                isPlaying: false,
-              },
-            ],
+                id: 'music',
+                file: new Audio('./assets/sounds/music/music.mp3'),
+                isPlaying: false
+              }
+            ]
           };
         },
         methods: {
           elinIsHungry: function () {
-            document.getElementById("elinSound").muted = false;
-            document.getElementById("elinSound").play();
+            document.getElementById('elinSound').muted = false;
+            document.getElementById('elinSound').play();
           },
           frenchGreeting: function () {
-            const audio = new Audio("./assets/sounds/putain.mp3");
+            const audio = new Audio('./assets/sounds/putain.mp3');
             audio.play();
           },
           pokemonGreeting: function () {
-            document.getElementById("pokemonSound").muted = false;
-            document.getElementById("pokemonSound").play();
+            document.getElementById('pokemonSound').muted = false;
+            document.getElementById('pokemonSound').play();
           },
           lucasGreeting: function () {
-            const lucasHello = new Audio("./assets/sounds/bark3.mp3");
+            const lucasHello = new Audio('./assets/sounds/bark3.mp3');
             lucasHello.play();
           },
           play(audio) {
@@ -320,19 +322,19 @@
             audio.file.pause();
           },
           farter: function () {
-            const fart = new Audio("./assets/sounds/fart.mp3");
+            const fart = new Audio('./assets/sounds/fart.mp3');
             fart.play();
           },
           shitter: function () {
-            const shit = new Audio("./assets/sounds/realShit.mp3");
+            const shit = new Audio('./assets/sounds/realShit.mp3');
             shit.play();
-          },
+          }
         },
         mounted() {
-          fetch("/data/scores.json")
+          fetch('/data/scores.json')
             .then((response) => {
               if (!response.ok)
-                throw new Error("HTTP error " + response.status);
+                throw new Error('HTTP error ' + response.status);
               return response.json();
             })
             .then((data) => {
@@ -342,15 +344,15 @@
               const month = dateObject.getMonth() + 1;
               const year = dateObject.getFullYear();
               const hoursUnformated = dateObject.getHours();
-              const hours = ("0" + hoursUnformated).slice(-2);
+              const hours = ('0' + hoursUnformated).slice(-2);
               const minutesUnformated = dateObject.getMinutes();
-              const minutes = ("0" + minutesUnformated).slice(-2);
+              const minutes = ('0' + minutesUnformated).slice(-2);
               this.results = scores;
               this.nextMatchStats = nextMatchStats;
               this.lastUpdate =
-                day + "/" + month + "/" + year + " " + hours + ":" + minutes;
+                day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
             });
-        },
+        }
       });
     </script>
 
