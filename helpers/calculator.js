@@ -21,7 +21,7 @@ for (let name of names) {
   calcfinal(name);
   calcChampion(name);
   calcTopScorers(name);
-  calcLastScoreSemi(name);
+  calcLastScoreChampion(name);
 }
 
 console.log(scores);
@@ -62,13 +62,15 @@ scoresArray.forEach((s, idx) => {
 // get next match stats
 // console.log('Getting next match stats...');
 // const nextMatchStats = getNextMatchStats();
-const nextMatchStats = getNextSemiMatchStats();
+const nextMatchStats = getNextChampionMatchStats();
+const topScorerStats = getTopScorerStats();
 
 // write file in json format
 console.log('Writing to file scores.json ...');
 const jsonData = JSON.stringify({
   scores: scoresArray,
   nextMatchStats,
+  topScorerStats,
   lastUpdate: new Date()
 });
 fs.writeFileSync('./data/scores.json', jsonData);
@@ -148,7 +150,7 @@ function calcfinal(name) {
   for (let team of finalPredictions) {
     if (finalResults.includes(team)) {
       scores[name].totalScore += 12;
-      scores[name].semi += 12;
+      scores[name].final += 12;
     }
   }
 }
@@ -221,6 +223,37 @@ function calcLastScoreSemi(name) {
   if (predictedWinners.includes(lastMatchWinner)) scores[name].lastScore = 8;
 }
 
+function calcLastScoreFinal(name) {
+  scores[name].lastScore = 0;
+  const { final } = results;
+  const currentMatchIdx = final.findIndex((x) => !x);
+  let lastMatchIdx;
+  if (currentMatchIdx === 0) {
+    calcLastScoreSemi(name);
+    return;
+  }
+
+  lastMatchIdx =
+    currentMatchIdx === -1 ? final.length - 1 : currentMatchIdx - 1;
+  const lastMatchWinner = final[lastMatchIdx];
+  const predictedWinners = predictions[name].final;
+  if (predictedWinners.includes(lastMatchWinner)) scores[name].lastScore = 12;
+}
+
+function calcLastScoreChampion(name) {
+  scores[name].lastScore = 0;
+  const { champion } = results;
+  const hasChampion = !!champion;
+  if (!hasChampion) {
+    calcLastScoreFinal(name);
+    return;
+  }
+
+  const lastMatchWinner = champion;
+  const predictedWinner = predictions[name].champion;
+  if (lastMatchWinner === predictedWinner) scores[name].lastScore = 15;
+}
+
 function getNextMatchStats() {
   const statsObj = {};
   const stats = [];
@@ -286,8 +319,8 @@ function getNextQuarterMatchStats() {
 function getNextSemiMatchStats() {
   const { semifinal, semifinalMatches } = results;
   let nextMatchIdx = semifinal.findIndex((x) => !x);
-  if (nextMatchIdx === -1) nextMatchIdx = semifinal.length - 1;
-  const nextMatch = semifinalMatches[nextMatchIdx];
+  if (nextMatchIdx === -1) nextMatchIdx = semifinal.length;
+  const nextMatch = semifinalMatches[nextMatchIdx] || {};
   nextMatch.hWin = 0;
   nextMatch.bWin = 0;
 
@@ -303,7 +336,7 @@ function getNextSemiMatchStats() {
     ({ lastMatch, lastMatchWinner } = getNextQuarterMatchStats());
   } else {
     lastMatch = semifinalMatches[nextMatchIdx - 1];
-    lastMatchWinner = semifinalMatches[nextMatchIdx - 1];
+    lastMatchWinner = semifinal[nextMatchIdx - 1];
   }
 
   return {
@@ -311,4 +344,85 @@ function getNextSemiMatchStats() {
     lastMatch,
     lastMatchWinner
   };
+}
+
+function getNextFinalMatchStats() {
+  const { final, finalMatches } = results;
+  let nextMatchIdx = final.findIndex((x) => !x);
+  if (nextMatchIdx === -1) nextMatchIdx = final.length;
+  const nextMatch = finalMatches[nextMatchIdx] || {};
+  nextMatch.hWin = 0;
+  nextMatch.bWin = 0;
+
+  // get predictions for next match
+  for (let name of names) {
+    const qPredictions = predictions[name].final;
+    if (qPredictions.includes(nextMatch.h)) nextMatch.hWin++;
+    if (qPredictions.includes(nextMatch.b)) nextMatch.bWin++;
+  }
+
+  let lastMatch, lastMatchWinner;
+  if (nextMatchIdx === 0) {
+    ({ lastMatch, lastMatchWinner } = getNextSemiMatchStats());
+  } else {
+    lastMatch = finalMatches[nextMatchIdx - 1];
+    lastMatchWinner = final[nextMatchIdx - 1];
+  }
+
+  return {
+    nextMatch,
+    lastMatch,
+    lastMatchWinner
+  };
+}
+
+function getNextChampionMatchStats() {
+  const { champion, championMatch } = results;
+  let hasChampion = !!champion;
+  let nextMatch = !hasChampion ? championMatch[0] : {};
+  nextMatch.hWin = 0;
+  nextMatch.bWin = 0;
+
+  let lastMatch, lastMatchWinner;
+  if (!hasChampion) {
+    ({ lastMatch, lastMatchWinner } = getNextFinalMatchStats());
+    // get predictions for next match
+    for (let name of names) {
+      const qPredictions = predictions[name].champion;
+      if (qPredictions === nextMatch.h) nextMatch.hWin++;
+      if (qPredictions === nextMatch.b) nextMatch.bWin++;
+    }
+  } else {
+    lastMatch = championMatch[0];
+    lastMatchWinner = champion;
+  }
+
+  return {
+    nextMatch,
+    lastMatch,
+    lastMatchWinner
+  };
+}
+
+function getTopScorerStats() {
+  const topScorers = {};
+  for (let name of names) {
+    const topScorerArr = predictions[name].topScorers;
+    for (let scorer of topScorerArr) {
+      if (topScorers[scorer] === undefined) {
+        topScorers[scorer] = 1;
+      } else {
+        topScorers[scorer]++;
+      }
+    }
+  }
+  const sortedScorers = [];
+  for (scorer in topScorers) {
+    sortedScorers.push([scorer, topScorers[scorer]]);
+  }
+  sortedScorers.sort((a, b) => {
+    return b[1] - a[1];
+  });
+  console.log('top scorers', sortedScorers);
+  return sortedScorers;
 }

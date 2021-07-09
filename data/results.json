@@ -71,8 +71,13 @@
     { "h": "Tsjekkia", "b": "Danmark" },
     { "h": "Ukriana", "b": "England" }
   ],
-  "semifinal": ["", "", "", ""],
-  "final": ["", ""],
+  "semifinal": ["Spania", "Italia", "Danmark", "England"],
+  "finalMatches": [
+    { "h": "Italia", "b": "Spania" },
+    { "h": "England", "b": "Danmark" }
+  ],
+  "final": ["Italia", "England"],
+  "championMatch": [{ "h": "Italia", "b": "England" }],
   "champion": "",
   "topScorers": ["", ""]
 }
