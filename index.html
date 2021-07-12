@@ -181,8 +181,15 @@
                 </div>
               </div>
             </div>
-            <div
-              v-if="nextMatchStats.nextMatch"
+            <div class="md:flex-1 flex-col flex items-center">
+              <h2 class="pb-2 text-xl font-mono mt-5 font-bold">
+                Og vinneren er ...
+              </h2>
+              <div class="text-italy animate-pulse">
+                <h1 class="pb-2 text-8xl font-mono mt-5 font-bold">Lars</h1>
+              </div>
+            </div>
+            <!-- <div
               class="md:flex-1 flex-col flex items-center"
             >
               <div class="ml-8">
@@ -274,13 +281,12 @@
                     :key="idx"
                     class="font-mono"
                   >
-                    hi
                     <td>{{scorer[0]}}</td>
                     <td class="text-center">{{scorer[1]}} spiller(e)</td>
                   </tr>
                 </table>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="flex">
             <div class="justify-start flex-1 items-end">
@@ -439,6 +445,15 @@
       }
       .omega-background {
         background-color: #808080;
+      }
+      .text-italy {
+        background-image: url(https://www.crossed-flag-pins.com/animated-flag-gif/gifs/Italy_240-animated-flag-gifs.gif);
+        background-position: center;
+        background-clip: text;
+        -moz-background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        width: 231px;
       }
     </style>
   </body>

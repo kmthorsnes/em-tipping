@@ -78,6 +78,6 @@
   ],
   "final": ["Italia", "England"],
   "championMatch": [{ "h": "Italia", "b": "England" }],
-  "champion": "",
-  "topScorers": ["", ""]
+  "champion": "Italia",
+  "topScorers": ["Cristiano Ronaldo", "Patrik Schick"]
 }
